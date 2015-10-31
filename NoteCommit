@@ -1,0 +1,25 @@
+     la prima volta fare
+
+  git clone https://github.com/livioivil/myFBr
+  cd myFBr
+
+
+poi x scaricare eventuali aggiornamenti del pacchetto
+
+   git pull origin master
+
+editare i file e poi
+
+   git status 
+
+x vedere quali file nuovi ci sono, quali modificati ...
+
+  git add nuovofile.R  (x aggiungere un file al repository)
+oppure se i file sono molti
+  git add --all
+
+x fare commit
+
+   git commit -a -m "mio commento"
+   git push
+
