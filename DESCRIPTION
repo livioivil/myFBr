@@ -3,7 +3,7 @@ Version: 0.1
 Date: 2015-10-31
 Title: Read and visualizes the infos of your FaceBook profile
 Author: Davide Meneghetti, Simone Righetto, Livio Finos
-Maintainer: davide meneghetti <davide.meneghetti@studenti.unipd.it>
+Maintainer: davide meneghetti <davide.meneghetti.1@studenti.unipd.it>
 Description: Read and visualizes the infos of your FaceBook profile
 License: GPL (>= 2)
 RoxygenNote: 5.0.0
