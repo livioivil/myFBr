@@ -2,19 +2,23 @@
 % Please edit documentation in R/getWall.R
 \name{getWall}
 \alias{getWall}
-\title{conoscere il numero delle varie attività sul wall}
+\title{conoscere il numero delle varie attivit? sul wall}
 \usage{
-getWall(percorso)
+getWall(percorso, dataI, dataF)
 }
 \arguments{
 \item{percorso}{stringa che indica il percorso della cartella dei dati del profilo}
+
+\item{dataI}{data di Inizio}
+
+\item{dataF}{data di Fine}
 }
 \value{
-dataset (1x7) contenente le informazioni delle attività sul Wall
+dataset (1x7) contenente le informazioni delle attivit? sul Wall dopo la data di riferimento
 }
 \description{
-Funzione che dato il percorso dei dati del profilo facebook ritorna il numero delle differenti attività che compaiono sul wall
-tra cui amicizie, stati, like, piace, condivisioni, link e giocato.
+Funzione che dato il percorso dei dati del profilo facebook ritorna il numero delle differenti attivit? che compaiono sul wall
+tra cui amicizie, stati, like, piace, condivisioni, link e giocato dopo una certa data.
 Funzione valida anche per profili scritti in lingua inglese o spagnola.
 }
 \author{

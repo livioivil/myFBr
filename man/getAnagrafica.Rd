@@ -4,18 +4,23 @@
 \alias{getAnagrafica}
 \title{conoscere le informazioni del profilo}
 \usage{
-getAnagrafica(percorso)
+getAnagrafica(percorso, dataI = as.POSIXct("1/1/69", format = "\%d/\%m/\%y"),
+  dataF = Sys.time())
 }
 \arguments{
 \item{percorso}{stringa che indica il percorso della cartella dei dati del profilo}
+
+\item{dataI}{data di inizio di riferimento}
+
+\item{dataF}{data di fine di riferimento}
 }
 \value{
-dataset (1x20) contenente le informazioni del profilo
+dataset (1x20) contenente le informazioni del profilo compresi fra 2 date
 }
 \description{
-Funzione che dato il percorso dei dati del profilo facebook ritorna l'insieme dei dati dell'utente in un'unica riga di dataset
-in particolare restituisce: sesso, n. di sessioni e di accessi, n. di amici di varia categoria, n. di post,
-n. di attività del wall delle varie categorie, n. di eventi con varia risposta, n. di foto, n. di posti e n. di messaggi privati.
+Funzione che dato il percorso dei dati del profilo facebook ritorna l'insieme dei dati di un profilo in un'unica riga di dataset
+compresi fra 2 date in particolare restituisce: sesso, n. di sessioni e di accessi, n. di amici di varia categoria, n. di post,
+n. di attivit? del wall delle varie categorie, n. di eventi con varia risposta, n. di foto, n. di posti e n. di messaggi privati.
 }
 \author{
 Davide Meneghetti

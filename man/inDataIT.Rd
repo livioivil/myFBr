@@ -2,18 +2,18 @@
 % Please edit documentation in R/inDataIT.R
 \name{inDataIT}
 \alias{inDataIT}
-\title{tradurre data da stringa per esteso a formato data}
+\title{inDataIT}
 \usage{
-inDataIT(data)
+inDataIT(a)
 }
 \arguments{
-\item{data}{stringa data estesa letta da facebook}
+\item{a}{stringa data estesa letta da facebook}
 }
 \value{
 data in formato Date
 }
 \description{
-Funzione traduce una data estesa letta come stringa da facebook in italiano e la restituisce in formato Date
+traduce una data estesa letta come stringa da facebook in italiano e la restituisce in formato Date
 }
 \author{
 Davide Meneghetti

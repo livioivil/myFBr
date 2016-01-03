@@ -8,5 +8,6 @@
 #'
 #' @docType package
 #' @name myFBr
+#' @import XML
 NULL
 #> NULL

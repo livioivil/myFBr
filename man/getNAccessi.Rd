@@ -2,18 +2,22 @@
 % Please edit documentation in R/getNAccessi.R
 \name{getNAccessi}
 \alias{getNAccessi}
-\title{conoscere il numero di sessioni aperte e il numero accessi}
+\title{conoscere il numero sessioni aperte e di accessi}
 \usage{
-getNAccessi(percorso)
+getNAccessi(percorso, dataI, dataF)
 }
 \arguments{
 \item{percorso}{stringa che indica il percorso della cartella dei dati del profilo}
+
+\item{dataI}{data di inizio di riferimento}
+
+\item{dataF}{data di fine di riferimento}
 }
 \value{
-dataset(1x2): numero di sessioni e numero di accessi
+dataset (1x2) contenente:numero di sessioni aperte e di accessi compresi fra 2 date
 }
 \description{
-Funzione che dato il percorso dei dati del profilo facebook ritorna il numero di sessioni aperte e il numero accessi
+Funzione che dato il percorso dei dati del profilo facebook ritorna il numero sessioni aperte e di accessi compresi fra 2 date
 }
 \author{
 Davide Meneghetti

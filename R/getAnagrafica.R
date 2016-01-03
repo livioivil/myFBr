@@ -1,31 +1,29 @@
-##' Funzione che dato il percorso dei dati del profilo facebook ritorna l'insieme dei dati dell'utente in un'unica riga di dataset
-##' in particolare restituisce: sesso, n. di sessioni e di accessi, n. di amici di varia categoria, n. di post,
-##' n. di attività del wall delle varie categorie, n. di eventi con varia risposta, n. di foto, n. di posti e n. di messaggi privati.
+##' @description Funzione che dato il percorso dei dati del profilo facebook ritorna l'insieme dei dati di un profilo in un'unica riga di dataset
+##' compresi fra 2 date in particolare restituisce: sesso, n. di sessioni e di accessi, n. di amici di varia categoria, n. di post,
+##' n. di attivit? del wall delle varie categorie, n. di eventi con varia risposta, n. di foto, n. di posti e n. di messaggi privati.
 ##' 
 ##' @title conoscere le informazioni del profilo
 ##' @param percorso stringa che indica il percorso della cartella dei dati del profilo
-##' @return dataset (1x20) contenente le informazioni del profilo
-##'
+##' @param dataI data di inizio di riferimento
+##' @param dataF data di fine di riferimento 
+##' @return dataset (1x20) contenente le informazioni del profilo compresi fra 2 date
+##' @export
+##' @title getAnagrafica
+##' 
 ##' @author Davide Meneghetti
 
-getAnagrafica <- function(percorso){
-  sesso=getSesso(percorso)
-  if(sesso=="Uomo")
-    {sesso=1}
-  else{sesso=0}
-  accessi=getNAccessi(percorso)
-  amici=getAmici(percorso)
-  nPost=getNPost(percorso)
-  nEventi=getEventi(percorso)
-  nFoto=getNFoto(percorso)
-  mess=getMessaggi(percorso)
-  wall=getWall(percorso)
-  nPosti=getPosti(percorso)
-  dataReg=getDataReg(percorso)  
-   
+getAnagrafica <- function(percorso,dataI=as.POSIXct("1/1/69", format="%d/%m/%y"),dataF=Sys.time()){
+  sesso=getSex(percorso)
+  #RIVEDERE:
+  accessi=getNAccessi(percorso,dataI,dataF)#
+  amici=getFriends(percorso)#
+  nPost=getNPost(percorso,dataI,dataF)#
+  nEventi=getEvents(percorso,dataI,dataF)#
+  nFoto=getNPhotos(percorso,dataI,dataF)#
+  mess=getMessages(percorso,dataI,dataF)# 
+  wall=getWall(percorso,dataI,dataF)#
+  nPosti=getPlaces(percorso,dataI,dataF)#
+  dataReg=getDataReg(percorso)
   dati<-cbind(sesso,accessi,amici,nPost,wall,nEventi,nFoto,nPosti,mess,dataReg)
   return(dati)
 }
-
-
-

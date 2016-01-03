@@ -1,3 +1,7 @@
+.which.within.date <- function(a,dataI,dataF){
+  which((a >= dataI) & (a <= dataF))
+}
+
 .estraielemento <- function(d){
   d=toString.XMLNode(d);
   d

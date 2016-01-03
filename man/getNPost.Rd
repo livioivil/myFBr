@@ -4,16 +4,20 @@
 \alias{getNPost}
 \title{conoscere il numero di post}
 \usage{
-getNPost(percorso)
+getNPost(percorso, dataI, dataF)
 }
 \arguments{
 \item{percorso}{stringa che indica il percorso della cartella dei dati del profilo}
+
+\item{dataI}{data di inizio di riferimento}
+
+\item{dataF}{data di fine di riferimento}
 }
 \value{
-numero di post scritti sulla bacheca
+numero di post scritti sulla bacheca compresi fra 2 date
 }
 \description{
-Funzione che dato il percorso dei dati del profilo facebook ritorna il numero di post sulla bacheca
+Funzione che dato il percorso dei dati del profilo facebook ritorna il numero di post sulla bacheca compresi fra 2 date
 }
 \author{
 Davide Meneghetti
