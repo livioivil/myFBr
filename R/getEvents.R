@@ -12,6 +12,7 @@
 ##' @author Davide Meneghetti
 
 getEvents <- function(percorso, dataI, dataF){
+  percorso=.fixPercorso(percorso)
   #numero eventi
   perE=paste(percorso,"/html/events.htm", sep="")
   #lettura intero file

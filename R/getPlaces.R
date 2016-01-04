@@ -10,6 +10,7 @@
 ##' @author Davide Meneghetti
 
 getPlaces <-function(percorso,dataI,dataF){
+  percorso=.fixPercorso(percorso)
   perA=paste(percorso,"/html/places.htm", sep="")
   #lettura intero file
   pg=htmlParse(perA)

@@ -10,6 +10,8 @@
 
 #funzione per leggere tutte le attivita' del wall
 getWallPosts <- function(percorso){
+  percorso=.fixPercorso(percorso)
+  
   
   perW=paste(percorso,"/html/wall.htm", sep="")
   #lettura intero file

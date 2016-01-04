@@ -1,3 +1,10 @@
+.fixPercorso <- function(percorso){
+  dirtemp=dir(percorso)
+  if("__MACOSX"%in%dirtemp)    
+    percorso=paste(percorso,sep="/",setdiff(dirtemp,"__MACOSX")[1])
+  percorso
+}
+
 .which.within.date <- function(a,dataI,dataF){
   which((a >= dataI) & (a <= dataF))
 }

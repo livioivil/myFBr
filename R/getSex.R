@@ -9,6 +9,8 @@
 ##' @author Davide Meneghetti, Livio Finos
 
 getSex <- function(percorso){
+  percorso=.fixPercorso(percorso)
+  
   perE=paste(percorso,"/index.htm", sep="")
   pg=htmlParse(perE)#lettura intero file
   sesso=getNodeSet(pg,"//tr[th[text()='Sesso']]/td/text()");

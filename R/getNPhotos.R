@@ -10,6 +10,7 @@
 ##' @author Davide Meneghetti
 
 getNPhotos <- function(percorso,dataI, dataF){
+  percorso=.fixPercorso(percorso)
   #numero di foto
   perF=paste(percorso,"/html/photos.htm", sep="")
   

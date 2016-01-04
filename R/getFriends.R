@@ -11,6 +11,7 @@
 ##' @author Davide Meneghetti
 
 getFriends <- function(percorso){
+  percorso=.fixPercorso(percorso)
   perA=paste(percorso,"/html/friends.htm", sep="")
   pg=htmlParse(perA) #lettura intero file
   

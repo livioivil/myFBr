@@ -3,7 +3,6 @@
 export(getAnagrafica)
 export(getDataDownload)
 export(getDataReg)
-export(getDati)
 export(getEvents)
 export(getFriends)
 export(getInfo)

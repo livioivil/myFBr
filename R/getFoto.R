@@ -7,6 +7,7 @@
 ##' @author Davide Meneghetti
 
 getNFoto <- function(percorso){
+  percorso=.fixPercorso(percorso)
   #numero di foto
   perF=paste(percorso,"/html/photos.htm", sep="")
   #lettura intero file

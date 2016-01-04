@@ -11,6 +11,7 @@
 ##' @author Davide Meneghetti
 
 getNPost <- function(percorso,dataI,dataF){
+  percorso=.fixPercorso(percorso)
   perW=paste(percorso,"/html/wall.htm", sep="")
   pg=htmlParse(perW)
   atti=getNodeSet(pg,"//div[@class='meta']/text()")

@@ -13,6 +13,7 @@
 
 #funzione per conoscere il numero di accessi di un profilo dato il percorso di una cartella
 getNAccessi <- function(percorso,dataI,dataF){
+  percorso=.fixPercorso(percorso)
   perA=paste(percorso,"/html/security.htm", sep="")
   #lettura intero file
   pg=htmlParse(perA)

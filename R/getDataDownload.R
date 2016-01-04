@@ -8,6 +8,7 @@
 
 #funzione per conoscere la data di registrazione
 getDataDownload <- function(percorso){
+  percorso=.fixPercorso(percorso)
   perDati=paste(percorso,"/index.htm", sep="")
   pg=htmlParse(perDati) #lettura intero file
   

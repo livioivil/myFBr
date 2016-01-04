@@ -11,6 +11,7 @@
 ##' @author Davide Meneghetti
 
 getNMessages <- function(percorso,dataI,dataF){
+  percorso=.fixPercorso(percorso)
   perM=paste(percorso,"/html/messages.htm", sep="")
   #lettura intero file
   pg=htmlParse(perM)

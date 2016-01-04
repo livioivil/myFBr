@@ -5,7 +5,7 @@
 ##' @return diverse informazioni
 ##' 
 ##' @author Davide Meneghetti
-##' @export
+
 
 
 getDati <- function(percorso){

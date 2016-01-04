@@ -13,6 +13,8 @@
 ##' @author Davide Meneghetti
 
 getAnagrafica <- function(percorso,dataI=-Inf,dataF=+Inf){
+  percorso=.fixPercorso(percorso)
+  
   info=getInfo(percorso)
   #RIVEDERE:
 #   accessi=getNAccessi(percorso,dataI,dataF)#

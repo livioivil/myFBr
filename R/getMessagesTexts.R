@@ -10,6 +10,7 @@
 ##' @author Davide Meneghetti, Livio Finos
 
 getMessagesTexts <- function(percorso){
+  percorso=.fixPercorso(percorso)
   #lettura intero file
   perM=paste(percorso,"/html/messages.htm", sep="")
   pg=htmlParse(perM)

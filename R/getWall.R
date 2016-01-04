@@ -14,6 +14,7 @@
 
 #funzione per leggere tutte le attivita' del wall
 getWall <- function(percorso, dataI, dataF){
+  percorso=.fixPercorso(percorso)
   
   cerca.testo=c(amicizia="hanno stretto amicizia",
                 stato="ha aggiornato il suo stato",
