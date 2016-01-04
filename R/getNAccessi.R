@@ -1,3 +1,4 @@
+##' DA RIVEDERE
 ##' Funzione che dato il percorso dei dati del profilo facebook ritorna il numero sessioni aperte e di accessi compresi fra 2 date
 ##'
 ##' @title conoscere il numero sessioni aperte e di accessi
@@ -15,6 +16,7 @@ getNAccessi <- function(percorso,dataI,dataF){
   perA=paste(percorso,"/html/security.htm", sep="")
   #lettura intero file
   pg=htmlParse(perA)
+#   getNodeSet(pg,"//h2")
   sess=getNodeSet(pg,"//div[@class='contents']/div/ul[1]/li/p/text()");#numero di sessioni attive
   acce=getNodeSet(pg,"//div[@class='contents']/div/ul[2]/li/p/text()");#numero di accessi all'account
   

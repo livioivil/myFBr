@@ -17,6 +17,7 @@ getNAccessi(percorso, dataI, dataF)
 dataset (1x2) contenente:numero di sessioni aperte e di accessi compresi fra 2 date
 }
 \description{
+DA RIVEDERE
 Funzione che dato il percorso dei dati del profilo facebook ritorna il numero sessioni aperte e di accessi compresi fra 2 date
 }
 \author{

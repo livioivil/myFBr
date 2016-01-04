@@ -1,3 +1,4 @@
+##' DA RIVEDERE
 ##' Funzione che dato il percorso dei dati del profilo facebook ritorna il dataset dei messaggi privati inviati e ricevuti
 ##' comprendendo 3 colonne: la data, l'utente e il testo del messaggio
 ##'
@@ -9,8 +10,12 @@
 
 getMessaggiDataset <- function(percorso){
   #lettura intero file
-  pg=htmlParse(percorso)
+  perM=paste(percorso,"/html/messages.htm", sep="")
+  pg=htmlParse(perM)
   #lettura nodi file
+  getNodeSet(pg,"//p/text()")
+#   getNodeSet(pg,"//div[@class='message']")
+  #il testo è coontenuto in <p>, esternamente a div message
   meta=getNodeSet(pg,"//div/span[@class='meta']/text()")
   user=getNodeSet(pg,"//div/span[@class='user']/text()")
   msgs=getNodeSet(pg,"///div/p/text()")

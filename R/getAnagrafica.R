@@ -12,18 +12,18 @@
 ##' 
 ##' @author Davide Meneghetti
 
-getAnagrafica <- function(percorso,dataI=as.POSIXct("1/1/69", format="%d/%m/%y"),dataF=Sys.time()){
-  sesso=getSex(percorso)
+getAnagrafica <- function(percorso,dataI=-Inf,dataF=+Inf){
+  info=getInfo(percorso)
   #RIVEDERE:
-  accessi=getNAccessi(percorso,dataI,dataF)#
+#   accessi=getNAccessi(percorso,dataI,dataF)#
   amici=getFriends(percorso)#
   nPost=getNPost(percorso,dataI,dataF)#
   nEventi=getEvents(percorso,dataI,dataF)#
   nFoto=getNPhotos(percorso,dataI,dataF)#
-  mess=getMessages(percorso,dataI,dataF)# 
+  mess=getNMessages(percorso,dataI,dataF)# 
   wall=getWall(percorso,dataI,dataF)#
   nPosti=getPlaces(percorso,dataI,dataF)#
-  dataReg=getDataReg(percorso)
-  dati<-cbind(sesso,accessi,amici,nPost,wall,nEventi,nFoto,nPosti,mess,dataReg)
+  dati<-cbind(info,#accessi,
+              amici,nPost,wall,nEventi,nFoto,nPosti,mess,dataReg)
   return(dati)
 }

@@ -9,9 +9,9 @@ getWall(percorso, dataI, dataF)
 \arguments{
 \item{percorso}{stringa che indica il percorso della cartella dei dati del profilo}
 
-\item{dataI}{data di Inizio}
+\item{dataI}{data di Inizio (-Inf by default)}
 
-\item{dataF}{data di Fine}
+\item{dataF}{data di Fine (+Inf by default)}
 }
 \value{
 dataset (1x7) contenente le informazioni delle attivit? sul Wall dopo la data di riferimento
@@ -19,9 +19,9 @@ dataset (1x7) contenente le informazioni delle attivit? sul Wall dopo la data di
 \description{
 Funzione che dato il percorso dei dati del profilo facebook ritorna il numero delle differenti attivit? che compaiono sul wall
 tra cui amicizie, stati, like, piace, condivisioni, link e giocato dopo una certa data.
-Funzione valida anche per profili scritti in lingua inglese o spagnola.
+Funzione NON valida per profili scritti in lingua inglese o spagnola, facile da aggiornare
 }
 \author{
-Davide Meneghetti
+Davide Meneghetti, Livio Finos
 }
 

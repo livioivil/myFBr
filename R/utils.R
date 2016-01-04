@@ -14,3 +14,14 @@
   v=gsub(" $","",v)
   v
 }
+
+.cleanSex <- function(sesso){
+  if(is.null(sesso)) return(NA)
+  sesso=.estraielemento(sesso[[1]])
+  sesso=gsub(" ","",sesso)
+  if(sesso=="Uomo")
+  {sesso="M"}
+  if(sesso=="Donna")
+  {sesso="F"}
+  sesso
+}

@@ -14,7 +14,7 @@ getNPost <- function(percorso,dataI,dataF){
   perW=paste(percorso,"/html/wall.htm", sep="")
   pg=htmlParse(perW)
   atti=getNodeSet(pg,"//div[@class='meta']/text()")
-  if(length(atti)) return(NA)
+  if(length(atti)==0) return(NA)
   temp=sapply(atti,.estraielemento)
   temp=inDataIT(temp)
   nposts=length(.which.within.date(temp,dataI,dataF))

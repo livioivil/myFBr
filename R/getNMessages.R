@@ -5,10 +5,12 @@
 ##' @param dataI data di inizio di riferimento
 ##' @param dataF data di fine di riferimento 
 ##' @return numero di messaggi privati compresi fra 2 date
+##' @export
+##' @title getNMessages
 ##' 
 ##' @author Davide Meneghetti
 
-getMessages <- function(percorso,dataI,dataF){
+getNMessages <- function(percorso,dataI,dataF){
   perM=paste(percorso,"/html/messages.htm", sep="")
   #lettura intero file
   pg=htmlParse(perM)

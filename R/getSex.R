@@ -6,24 +6,12 @@
 ##' @export
 ##' @title getSex
 ##' 
-##' @author Davide Meneghetti
+##' @author Davide Meneghetti, Livio Finos
 
 getSex <- function(percorso){
   perE=paste(percorso,"/index.htm", sep="")
   pg=htmlParse(perE)#lettura intero file
   sesso=getNodeSet(pg,"//tr[th[text()='Sesso']]/td/text()");
-  if(is.null(sesso)) return(NA)
-  #if (length(sesso)==0){    #INGLESE
-  #  sesso=getNodeSet(pg,"//tr[th[text()='Gender']]/td/text()");
-  #}
-  #if (length(sesso)==0){    #SPAGNOLO
-  #  sesso=getNodeSet(pg,"//tr[th[text()='Sexo']]/td/text()");
-  #}
-  ses=.estraielemento(sesso[[1]])
-  ses=gsub(" ","",ses)
-  if(ses=="Uomo")
-  {ses="M"}
-  if(ses=="Donna")
-  {ses="F"}
-  return(ses)
+  sesso = .cleanSex(sesso)
+  return(sesso)
 }#getSesso

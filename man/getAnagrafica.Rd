@@ -4,8 +4,7 @@
 \alias{getAnagrafica}
 \title{conoscere le informazioni del profilo}
 \usage{
-getAnagrafica(percorso, dataI = as.POSIXct("1/1/69", format = "\%d/\%m/\%y"),
-  dataF = Sys.time())
+getAnagrafica(percorso, dataI = -Inf, dataF = +Inf)
 }
 \arguments{
 \item{percorso}{stringa che indica il percorso della cartella dei dati del profilo}
