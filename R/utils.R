@@ -2,7 +2,18 @@
   dirtemp=dir(percorso)
   if("__MACOSX"%in%dirtemp){    
     percorso=paste(percorso,sep="/",setdiff(dirtemp,"__MACOSX")[1])
+    dirtemp=dir(percorso)
   }
+  continue=TRUE
+  while((!("index.htm"%in%dirtemp)) && continue){
+    if(!is.null(dirtemp[1])){
+      percorso=paste(percorso,sep="/",dirtemp[1])
+      dirtemp=dir(percorso)
+    } else {
+      continue=FALSE
+      warning("the path does not contain the correct files")
+    }
+  }  
   percorso
 }
 
