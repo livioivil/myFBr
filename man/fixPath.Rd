@@ -4,7 +4,12 @@
 \alias{fixPath}
 \title{fixPath}
 \usage{
-fixPath(percorso, silent = FALSE)
+fixPath(file.path, silent = FALSE)
+}
+\arguments{
+\item{file.path}{path}
+
+\item{silent}{FALSE}
 }
 \value{
 correct file.path
