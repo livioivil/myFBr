@@ -1,7 +1,8 @@
 .fixPercorso <- function(percorso){
   dirtemp=dir(percorso)
-  if("__MACOSX"%in%dirtemp)    
+  if("__MACOSX"%in%dirtemp){    
     percorso=paste(percorso,sep="/",setdiff(dirtemp,"__MACOSX")[1])
+  }
   percorso
 }
 

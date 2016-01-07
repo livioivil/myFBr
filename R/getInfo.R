@@ -27,7 +27,7 @@ getInfo <- function(percorso){
   
   dataDown=.getDataDownload(pg)
   
-  data.frame(dataReg=dataReg,
+  data.frame(email=email,dataReg=dataReg,
              dataDownload=dataDown,
              sesso=sesso,
              dataNascita=as.POSIXct(.getValore(pg,"//tr[th/text()='Data di nascita']/td/text()"),format ="%m/%d/%Y",tz="UTC"),
