@@ -12,8 +12,16 @@ getInfo <- function(percorso){
   percorso=.fixPercorso(percorso)
   perE=paste(percorso,"/index.htm", sep="")
   pg=htmlParse(perE)#lettura intero file
+  email=getNodeSet(pg,"//tr[th[text()='Email']]/td/text()");
+  email = email[[1]]
+  
   sesso=getNodeSet(pg,"//tr[th[text()='Sesso']]/td/text()");
   sesso = .cleanSex(sesso)
+  if(is.na(sesso)){
+    sesso=getNodeSet(pg,"//tr[th[text()='Genere']]/td/text()");
+    sesso = .cleanSex(sesso)
+  }
+    
   dataReg=.getValore(pg,"//tr[th/text()='Data di registrazione']/td/text()")
   dataReg=inDataIT(dataReg)
   
