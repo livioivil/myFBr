@@ -19,14 +19,13 @@ getAnagrafica <- function(percorso,dataI=-Inf,dataF=+Inf){
   #RIVEDERE:
 #   accessi=getNAccessi(percorso,dataI,dataF)#
   amici=getFriends(percorso)#
-  nPost=getNPost(percorso,dataI,dataF)#
   nEventi=getEvents(percorso,dataI,dataF)#
   nFoto=getNPhotos(percorso,dataI,dataF)#
   mess=getNMessages(percorso,dataI,dataF)# 
   wall=getWall(percorso,dataI,dataF)#
   nPosti=getPlaces(percorso,dataI,dataF)#
   dati<-cbind(info,#accessi,
-              amici,nPost,wall,nEventi,nFoto,nPosti,mess)
+              amici,wall,nEventi,nFoto,nPosti,mess)
   rownames(dati)=percorso
   return(dati)
 }
