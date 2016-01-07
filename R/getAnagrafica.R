@@ -13,7 +13,7 @@
 ##' @author Davide Meneghetti
 
 getAnagrafica <- function(percorso,dataI=-Inf,dataF=+Inf){
-  percorso=.fixPercorso(percorso)
+  percorso=fixPath(percorso)
   
   info=getInfo(percorso)
   #RIVEDERE:
