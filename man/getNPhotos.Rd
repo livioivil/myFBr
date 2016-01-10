@@ -2,9 +2,9 @@
 % Please edit documentation in R/getNPhotos.R
 \name{getNPhotos}
 \alias{getNPhotos}
-\title{conoscere il numero di foto}
+\title{calcola il numero di foto}
 \usage{
-getNPhotos(percorso, dataI, dataF)
+getNPhotos(percorso, dataI = NULL, dataF = NULL)
 }
 \arguments{
 \item{percorso}{stringa che indica il percorso della cartella dei dati del profilo}
@@ -17,9 +17,11 @@ getNPhotos(percorso, dataI, dataF)
 numero di foto pubblicate dal profilo dopo la data di riferimento comprese fra 2 date
 }
 \description{
-Funzione che dato il percorso dei dati del profilo facebook ritorna il numero di foto comprese fra 2 date
+Funzione che dato il percorso dei dati del profilo facebook 
+ritorna il numero di foto (getNPhotos) o tutte le informazioni sulle singole foto (getPhotos)
+comprese fra 2 date.(NON ANCORA IMPLEMENTATA)
 }
 \author{
-Davide Meneghetti
+Davide Meneghetti, Livio Finos
 }
 

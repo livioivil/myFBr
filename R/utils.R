@@ -3,15 +3,33 @@
   fixPath(percorso)
 }
 
-.which.within.date <- function(a,dataI,dataF){
-  which((a >= dataI) & (a <= dataF))
+
+.which.within.date.null <- function(a,dataI,dataF){
+  if(is.null(dataI)&is.null(dataF)) return(NULL)
+  if(is.null(dataI)&(!is.null(dataF))) return((a <= dataF))
+  if(is.null(dataF)&(!is.null(dataI))) return((a >= dataI)) else
+    which((a >= dataI) &  (a <= dataF))
 }
+
+.which.within.date <- function(a,dataI,dataF){
+  if(is.null(dataI)&is.null(dataF)) return(rep(TRUE,length(a)))
+  if(is.null(dataI)&(!is.null(dataF))) return((a <= dataF))
+  if(is.null(dataF)&(!is.null(dataI))) return((a >= dataI)) else
+  which((a >= dataI) &  (a <= dataF))
+}
+
 
 .estraielemento <- function(d){
   d=toString.XMLNode(d);
   d
 }
 
+.estraielementi <- function(d){
+  sapply(d,toString.XMLNode)  
+}
+
+
+#######################
 .getValore <- function (file,ric){
   v=getNodeSet(file,ric)
   v=v[[1]]

@@ -7,36 +7,3 @@
 ##' @return dataset dei messaggi composto da data, utente autore e testo dei messaggi
 ##' 
 ##' @author Davide Meneghetti
-
-getMessaggiDataset <- function(percorso){
-  #lettura intero file
-  perM=paste(percorso,"/html/messages.htm", sep="")
-  pg=htmlParse(perM)
-  #lettura nodi file
-  getNodeSet(pg,"//p/text()")
-#   getNodeSet(pg,"//div[@class='message']")
-  #il testo è coontenuto in <p>, esternamente a div message
-  meta=getNodeSet(pg,"//div/span[@class='meta']/text()")
-  user=getNodeSet(pg,"//div/span[@class='user']/text()")
-  msgs=getNodeSet(pg,"///div/p/text()")
-  n=length(msgs)
-  
-  getInfo <- function(i){
-    #data e ora
-    data=.estraielemento(meta[[i]])
-    #utente
-    uten=.estraielemento(user[[i]])
-    #messaggio
-    mess=.estraielemento(msgs[[i]])
-    c(data=data,uten=uten,mess=mess)
-  }
-  
-  #estrazione dati da lista
-  rr=t(sapply(1:n, getInfo))
-    #creazione dataset
-  "messaggi" <- structure(.Data = list(rr[,"data"],rr[,"uten"],rr[,"mess"]),
-                          names = c("data", "utente", "messaggio"),
-                          row.names = c(1:n),
-                          class = "data.frame")
-  return(messaggi)
-}
