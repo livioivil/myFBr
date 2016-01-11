@@ -4,12 +4,14 @@
 \alias{fixPath}
 \title{fixPath}
 \usage{
-fixPath(file.path, silent = FALSE)
+fixPath(file.path, silent = FALSE, ifEmptyTryInWD = TRUE)
 }
 \arguments{
 \item{file.path}{path}
 
 \item{silent}{FALSE}
+
+\item{ifEmptyTryInWD}{If the file.path is empty, have a try using the working directory as root.}
 }
 \value{
 correct file.path

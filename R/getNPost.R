@@ -10,7 +10,7 @@
 
 ##' @author Davide Meneghetti
 
-getNPost <- function(percorso,dataI,dataF){
+getNPost <- function(percorso,dataI=NULL,dataF=NULL){
   percorso=.fixPercorso(percorso)
   perW=paste(percorso,"/html/wall.htm", sep="")
   pg=htmlParse(perW)

@@ -4,7 +4,7 @@
 \alias{getNPost}
 \title{conoscere il numero di post}
 \usage{
-getNPost(percorso, dataI, dataF)
+getNPost(percorso, dataI = NULL, dataF = NULL)
 }
 \arguments{
 \item{percorso}{stringa che indica il percorso della cartella dei dati del profilo}

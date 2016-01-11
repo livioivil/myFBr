@@ -14,26 +14,28 @@
 
 
 getNPhotos <- function(percorso,dataI=NULL, dataF=NULL){
-  percorso=.fixPercorso(percorso)
+  percorso=fixPath(percorso)
   #numero di foto
   perF=paste(percorso,"/photos", sep="")
   list.album = list.dirs(perF)[-1]
   #lettura intero file
-#   album=list.album[1]
+#   album=list.album[2]
   ############################
   .getInfoPhoto <- function(album){
-    pg=htmlParse(paste(album,"/index.htm", sep=""))
-    dataL=  getNodeSet(pg,"//div[@class='block']/div/div[@class='meta']/text()") #data foto
-    dataL=.estraielementi(dataL)
-    dataL=inDataIT(dataL)
-    id.select=.which.within.date.null(dataL,dataI,dataF)
-    if(is.null(id.select)) 
-      return(length(dataL)) else 
-        return(length(id.select))
+    index.path=paste(album,"/index.htm", sep="")
+    if("index.htm"%in%dir(album)){
+      pg=htmlParse(index.path)
+      dataL=  getNodeSet(pg,"//div[@class='block']/div/div[@class='meta']/text()") #data foto
+      dataL=.estraielementi(dataL)
+      dataL=inDataIT(dataL)
+      id.select=.which.within.date.null(dataL,dataI,dataF)
+      if(is.null(id.select)) 
+        return(length(dataL)) else 
+          return(length(id.select))
+    } else return(0)
   }
   res=(sapply(list.album,.getInfoPhoto))
-  res=res[res>0]
-  ############################
-  
-  return(c(nAlbum=length(res),nPhoto=sum(res)))
+#   res=res[res>0]
+  ############################  
+  return(list(nAlbum=length(res),nPhoto=sum(res),nPhotoInAlbum=res))
 }
