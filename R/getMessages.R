@@ -24,7 +24,7 @@ getMessages <- function(percorso,dataI=NULL,dataF=NULL){
   meta=getNodeSet(pg,"//div/span[@class='meta']/text()")
   meta=.estraielementi(meta)
   meta=inDataIT(meta)
-  id.select=.which.within.date.null(messaggi$time,dataI, dataF)
+  id.select=.which.within.date.null(meta,dataI, dataF)
   if(!is.null(id.select)) meta=meta[id.select]
   
   user=getNodeSet(pg,"//div/span[@class='user']/text()")
