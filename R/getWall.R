@@ -15,7 +15,7 @@
 ##' @author Davide Meneghetti, Livio Finos
 
 #funzione per leggere tutte le attivita' del wall
-getWall_summary <- function(percorso, dataI, dataF){
+getWall_summary <- function(percorso, dataI=NULL, dataF=NULL){
   percorso=.fixPercorso(percorso)
   
   cerca.testo=c(amicizia="hanno stretto amicizia",
@@ -30,16 +30,14 @@ getWall_summary <- function(percorso, dataI, dataF){
                 nuovaFoto="aggiunto una nuova foto all\'album")
 
   perW=paste(percorso,"/html/wall.htm", sep="")
+  if(!("wall.htm"%in%dir(paste(percorso,"/html", sep="")))){
+    return(.make.empty.Wall_symmary(cerca.testo))}
   #lettura intero file
   pg=htmlParse(perW)  
   #lettura sezione file
   wall=getNodeSet(pg,"//div[@class='contents']/div/text()")
   if(length(wall)==0) {
-    "nWall" <- structure(.Data = as.list(rep(NA,length(cerca.testo)+1)),
-                         names = c(names(cerca.testo),"postTotali"),
-                         row.names = c(1:1),
-                         class = "data.frame")
-    return(nWall)}
+    return(.make.empty.Wall_symmary(cerca.testo))}
   wall=sapply(wall,.estraielemento)
   #wall
 #   n=length(wall)

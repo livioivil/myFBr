@@ -4,7 +4,7 @@
 \alias{getWall_summary}
 \title{conoscere il numero delle varie attivit? sul wall}
 \usage{
-getWall_summary(percorso, dataI, dataF)
+getWall_summary(percorso, dataI = NULL, dataF = NULL)
 }
 \arguments{
 \item{percorso}{stringa che indica il percorso della cartella dei dati del profilo}

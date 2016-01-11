@@ -1,3 +1,10 @@
+.make.empty.Wall_symmary <-function(cerca.testo){ 
+  "nWall" <- structure(.Data = as.list(rep(NA,length(cerca.testo)+1)),
+                       names = c(names(cerca.testo),"postTotali"),
+                       row.names = c(1:1),
+                       class = "data.frame")
+  nWall}
+
 #mantenuta solo per peigrizia, sostituire ovunque nelle funzioni, man mano 
 .fixPercorso <- function(percorso){
   fixPath(percorso)

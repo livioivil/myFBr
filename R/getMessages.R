@@ -16,7 +16,7 @@ getMessages <- function(percorso,dataI=NULL,dataF=NULL){
   percorso =fixPath(percorso)
   #lettura intero file
   perM=paste(percorso,"/html/messages.htm", sep="")
-  if(!(perM%in%dir(paste(percorso,"/html", sep=""))))
+  if(!("messages.htm"%in%dir(paste(percorso,"/html", sep=""))))
     return(data.frame(time=NA,user=NA,text=NA)[-1,])
   pg=htmlParse(perM)
   #lettura nodi file
@@ -55,6 +55,8 @@ getMessages <- function(percorso,dataI=NULL,dataF=NULL){
 getNMessages <- function(percorso,dataI=NULL,dataF=NULL){
   percorso=.fixPercorso(percorso)
   perM=paste(percorso,"/html/messages.htm", sep="")
+  if(!("messages.htm"%in%dir(paste(percorso,"/html", sep=""))))
+    return(NA)
   #lettura intero file
   pg=htmlParse(perM)
   #lettura nodi file

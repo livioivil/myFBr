@@ -34,6 +34,9 @@ getInfo <- function(percorso){
   
   dataDown=.getDataDownload(pg)
   
+  cittaNatale=.getCittaNatale .getValore(pg,"//tr[th/text()='Città natale']/td/text()"),
+  situazSentim=.getSituazSentim(pg,"//tr[th/text()='Situazione sentimentale']/td/text()")
+  
   data.frame(nome=nome,
              email=email,dataReg=dataReg,
              dataDownload=dataDown,

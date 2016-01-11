@@ -12,6 +12,8 @@
 getPlaces <-function(percorso,dataI,dataF){
   percorso=.fixPercorso(percorso)
   perA=paste(percorso,"/html/places.htm", sep="")
+  if(!(perA%in%dir(paste(percorso,"/html", sep=""))))
+    return(NA)
   #lettura intero file
   pg=htmlParse(perA)
   

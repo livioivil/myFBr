@@ -17,6 +17,8 @@ getNPhotos <- function(percorso,dataI=NULL, dataF=NULL){
   percorso=fixPath(percorso)
   #numero di foto
   perF=paste(percorso,"/photos", sep="")
+  if(!("photos"%in%dir(percorso)))
+    return(NA)
   list.album = list.dirs(perF)[-1]
   #lettura intero file
 #   album=list.album[2]
