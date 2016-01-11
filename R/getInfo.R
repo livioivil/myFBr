@@ -12,6 +12,7 @@ getInfo <- function(percorso){
   percorso=.fixPercorso(percorso)
   perE=paste(percorso,"/index.htm", sep="")
   pg=htmlParse(perE)#lettura intero file
+  
   nome=getNodeSet(pg,"//tr[th[text()='Profilo']]/td/a/text()");
   nome=.estraielemento(nome[[1]])
   nome=gsub("http://www\\.facebook\\.com/","",nome)
@@ -28,14 +29,24 @@ getInfo <- function(percorso){
     sesso=getNodeSet(pg,"//tr[th[text()='Genere']]/td/text()");
     sesso = .cleanSex(sesso)
   }
-    
+  
+  
   dataReg=.getValore(pg,"//tr[th/text()='Data di registrazione']/td/text()")
   dataReg=inDataIT(dataReg)
   
   dataDown=.getDataDownload(pg)
-  
-  cittaNatale=.getCittaNatale .getValore(pg,"//tr[th/text()='Città natale']/td/text()"),
-  situazSentim=.getSituazSentim(pg,"//tr[th/text()='Situazione sentimentale']/td/text()")
+
+  .getCittaNatale <- function(pg){
+    out=.getValore(pg,"//tr[th/text()='Città natale']/td/text()")
+    if(out=="NULL") out=NULL
+    out
+  }
+  .getSituazSentim <- function(pg){
+    out=.getValore(pg,"//tr[th/text()='Situazione sentimentale']/td/text()")
+    if(out=="NULL") out=NULL
+    out
+  }
+
   
   data.frame(nome=nome,
              email=email,dataReg=dataReg,
