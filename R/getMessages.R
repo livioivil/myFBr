@@ -61,8 +61,7 @@ getNMessages <- function(percorso,dataI=NULL,dataF=NULL){
   pg=htmlParse(perM)
   #lettura nodi file
   meta=getNodeSet(pg,"//div/span[@class='meta']/text()")
-  
-  
+    
   meta=.estraielementi(meta)
   
   nmess=length(.which.within.date(inDataIT(meta),dataI, dataF))

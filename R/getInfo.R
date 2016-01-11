@@ -9,7 +9,7 @@
 ##' @author Davide Meneghetti, Livio Finos
 
 getInfo <- function(percorso){
-  percorso=.fixPercorso(percorso)
+  percorso=fixPath(percorso)
   perE=paste(percorso,"/index.htm", sep="")
   pg=htmlParse(perE)#lettura intero file
   
@@ -17,10 +17,11 @@ getInfo <- function(percorso){
   nome=.estraielemento(nome[[1]])
   nome=gsub("http://www\\.facebook\\.com/","",nome)
   nome=gsub(" ","",nome)
+  nome =ifelse(nome=="NULL",NA,nome)
   nome =ifelse(is.null(nome),NA,nome)
   
   email=getNodeSet(pg,"//tr[th[text()='Email']]/td/text()");
-  email = email[[1]]
+  email = .estraielemento(email[[1]])
   email=ifelse(is.null(email),NA,email)
   
   sesso=getNodeSet(pg,"//tr[th[text()='Sesso']]/td/text()");
