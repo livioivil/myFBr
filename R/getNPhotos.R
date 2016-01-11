@@ -35,7 +35,7 @@ getNPhotos <- function(percorso,dataI=NULL, dataF=NULL){
     } else return(0)
   }
   res=(sapply(list.album,.getInfoPhoto))
-#   res=res[res>0]
+   res=res[res>0]
   ############################  
   return(list(nAlbum=length(res),nPhoto=sum(res),nPhotoInAlbum=res))
 }
