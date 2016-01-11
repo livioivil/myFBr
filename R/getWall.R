@@ -6,14 +6,16 @@
 ##' @param percorso stringa che indica il percorso della cartella dei dati del profilo
 ##' @param dataI data di Inizio (-Inf by default)
 ##' @param dataF data di Fine (+Inf by default)
-##' @return dataset (1x7) contenente le informazioni delle attivit? sul Wall dopo la data di riferimento
-##' @export
+##' @return getWall un dataset a con tre colonne: time, user, text
+##' getWall_summary: dataset (1x7) contenente le informazioni delle attivit? sul Wall dopo la data di riferimento
+##' @export getWall getWall_summary
 ##' @title getWall
+##' @aliases getWall_summary
 ##' 
 ##' @author Davide Meneghetti, Livio Finos
 
 #funzione per leggere tutte le attivita' del wall
-getWall <- function(percorso, dataI, dataF){
+getWall_summary <- function(percorso, dataI, dataF){
   percorso=.fixPercorso(percorso)
   
   cerca.testo=c(amicizia="hanno stretto amicizia",
@@ -82,5 +84,43 @@ getWall <- function(percorso, dataI, dataF){
 # 
 #   }
 #   
+  return(nWall)  
+}
+
+######################
+getWall <- function(percorso, dataI, dataF){
+  percorso=.fixPercorso(percorso)
+  
+  perW=paste(percorso,"/html/wall.htm", sep="")
+  #lettura intero file
+  pg=htmlParse(perW)  
+  #lettura sezione file
+  wall=getNodeSet(pg,"//div[@class='contents']/div/text()")
+  if(length(wall)==0) {
+    "nWall" <- structure(.Data = as.list(rep(NA,length(cerca.testo)+1)),
+                         names = c(names(cerca.testo),"postTotali"),
+                         row.names = c(1:1),
+                         class = "data.frame")
+    return(nWall)}
+  wall=sapply(wall,.estraielemento)
+  #wall
+  #   n=length(wall)
+  data=getNodeSet(pg,"//div[@class='contents']/div/div[@class='meta']/text()")
+  #data
+  data=sapply(data,.estraielemento)
+  data=inDataIT(data)
+  keep=.which.within.date(data,dataI, dataF) 
+  #   data=data[keep]
+  wall=wall[keep]
+  n=length(keep)
+  
+  #   sum(res)
+  res=sapply(cerca.testo, function(txt) length(grep(txt,wall)))
+  res=c(res,postTotali=n)
+  #creazione dataset
+  "nWall" <- structure(.Data = as.list(res),
+                       names = names(res) ,
+                       row.names = c(1:1),
+                       class = "data.frame")
   return(nWall)  
 }

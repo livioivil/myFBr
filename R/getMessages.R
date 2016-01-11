@@ -13,6 +13,7 @@
 
 
 getMessages <- function(percorso,dataI=NULL,dataF=NULL){
+  percorso =fixPath(percorso)
   #lettura intero file
   perM=paste(percorso,"/html/messages.htm", sep="")
   pg=htmlParse(perM)

@@ -22,7 +22,7 @@ getAnagrafica <- function(percorso,dataI=-Inf,dataF=+Inf){
   nEventi=getEvents(percorso,dataI,dataF)#
   nFoto=getNPhotos(percorso,dataI,dataF)#
   mess=getNMessages(percorso,dataI,dataF)# 
-  wall=getWall(percorso,dataI,dataF)#
+  wall=getWall_summary(percorso,dataI,dataF)#
   nPosti=getPlaces(percorso,dataI,dataF)#
   dati<-cbind(info,#accessi,
               amici,wall,nEventi,nFoto=nFoto["nPhoto"],nAlbum=nFoto["nAlbum"],nPosti,mess)
