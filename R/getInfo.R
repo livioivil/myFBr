@@ -20,8 +20,9 @@ getInfo <- function(percorso){
   nome =ifelse(nome=="NULL",NA,nome)
   nome =ifelse(is.null(nome),NA,nome)
   
-  email=getNodeSet(pg,"//tr[th[text()='Email']]/td/text()");
+  email=getNodeSet(pg,"//tr[th[text()='E-mail']]/td/text()");
   email = .estraielemento(email[[1]])
+  email=gsub(" $","",email)
   email=ifelse(is.null(email),NA,email)
   
   sesso=getNodeSet(pg,"//tr[th[text()='Sesso']]/td/text()");
@@ -36,7 +37,7 @@ getInfo <- function(percorso){
   dataReg=inDataIT(dataReg)
   
   dataDown=.getDataDownload(pg)
-
+  
   .getCittaNatale <- function(pg){
     out=.getValore(pg,"//tr[th/text()='Città natale']/td/text()")
     if(out=="NULL") out=NULL
@@ -47,7 +48,7 @@ getInfo <- function(percorso){
     if(out=="NULL") out=NULL
     out
   }
-
+  
   
   data.frame(nome=nome,
              email=email,dataReg=dataReg,

@@ -7,12 +7,12 @@
 ##' @return numero di posti dove ci si ? segnalati dopo la data di riferimento compresi fra 2 date
 ##' @export
 ##' @title getPlaces
-##' @author Davide Meneghetti
+##' @author Davide Meneghetti, Livio Finos
 
 getPlaces <-function(percorso,dataI,dataF){
-  percorso=.fixPercorso(percorso)
+  percorso=fixPath(percorso)
   perA=paste(percorso,"/html/places.htm", sep="")
-  if(!(perA%in%dir(paste(percorso,"/html", sep=""))))
+  if(!("places.htm"%in%dir(paste(percorso,"/html", sep=""))))
     return(NA)
   #lettura intero file
   pg=htmlParse(perA)
