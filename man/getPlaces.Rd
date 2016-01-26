@@ -20,6 +20,6 @@ numero di posti dove ci si ? segnalati dopo la data di riferimento compresi fra 
 Funzione che dato il percorso dei dati del profilo facebook ritorna il numero di posti in cui si ? stati compresi fra 2 date
 }
 \author{
-Davide Meneghetti
+Davide Meneghetti, Livio Finos
 }
 
