@@ -32,7 +32,7 @@
 }
 
 .estraielementi <- function(d){
-  sapply(d,toString.XMLNode)  
+  plyr::llply(d,toString.XMLNode)  
 }
 
 
