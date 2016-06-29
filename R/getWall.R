@@ -18,16 +18,16 @@
 getWall_summary <- function(percorso, dataI=NULL, dataF=NULL){
   percorso=.fixPercorso(percorso)
   
-  cerca.testo=c(amicizia="hanno stretto amicizia",
-                stato="ha aggiornato il suo stato",
-                piace =  " piace ",
-                condiviso= "ha condiviso la foto",
-                linkAltri= "ha pubblicato un link sul tuo diario.",
-                linkTuo="ha condiviso un link.",
-                partecipato="ha partecipato a",
-                postInBacheca="scritto sul tuo diario",
-                aggiornImgProf="aggiornato la sua immagine del profilo",
-                nuovaFoto="aggiunto una nuova foto all\'album")
+  cerca.testo=c(w_amicizia="hanno stretto amicizia",
+                w_stato="ha aggiornato il suo stato",
+                w_piace =  " piace ",
+                w_condiviso= "ha condiviso la foto",
+                w_linkAltri= "ha pubblicato un link sul tuo diario.",
+                w_linkTuo="ha condiviso un link.",
+                w_partecipato="ha partecipato a",
+                w_postInBacheca="scritto sul tuo diario",
+                w_aggiornImgProf="aggiornato la sua immagine del profilo",
+                w_nuovaFoto="aggiunto una nuova foto all\'album")
 
   perW=paste(percorso,"/html/wall.htm", sep="")
   if(!("wall.htm"%in%dir(paste(percorso,"/html", sep="")))){
@@ -52,7 +52,7 @@ getWall_summary <- function(percorso, dataI=NULL, dataF=NULL){
 
 #   sum(res)
   res=sapply(cerca.testo, function(txt) length(grep(txt,wall)))
-  res=c(res,postTotali=n)
+  res=c(res,w_postTotali=n)
 #creazione dataset
 "nWall" <- structure(.Data = as.list(res),
                        names = names(res) ,
