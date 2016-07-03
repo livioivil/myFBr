@@ -6,6 +6,7 @@
 ##' @param percorso stringa che indica il percorso della cartella dei dati del profilo
 ##' @param dataI data di Inizio (-Inf by default)
 ##' @param dataF data di Fine (+Inf by default)
+##' @param wall result of a call of \code{getWall}.
 ##' @return getWall un dataset a con tre colonne: time, user, text
 ##' getWall_summary: dataset (1x7) contenente le informazioni delle attivit? sul Wall dopo la data di riferimento
 ##' @export getWall getWall_summary
@@ -15,9 +16,7 @@
 ##' @author Davide Meneghetti, Livio Finos
 
 #funzione per leggere tutte le attivita' del wall
-getWall_summary <- function(percorso, dataI=NULL, dataF=NULL){
-  percorso=.fixPercorso(percorso)
-  
+getWall_summary <- function(wall){
   cerca.testo=c(w_amicizia="hanno stretto amicizia",
                 w_stato="ha aggiornato il suo stato",
                 w_piace =  " piace ",
@@ -29,96 +28,39 @@ getWall_summary <- function(percorso, dataI=NULL, dataF=NULL){
                 w_aggiornImgProf="aggiornato la sua immagine del profilo",
                 w_nuovaFoto="aggiunto una nuova foto all\'album")
 
-  perW=paste(percorso,"/html/wall.htm", sep="")
-  if(!("wall.htm"%in%dir(paste(percorso,"/html", sep="")))){
-    return(.make.empty.Wall_symmary(cerca.testo))}
-  #lettura intero file
-  pg=htmlParse(perW)  
-  #lettura sezione file
-  wall=getNodeSet(pg,"//div[@class='contents']/div/text()")
-  if(length(wall)==0) {
-    return(.make.empty.Wall_symmary(cerca.testo))}
-  wall=sapply(wall,.estraielemento)
-  #wall
-#   n=length(wall)
-  data=getNodeSet(pg,"//div[@class='contents']/div/div[@class='meta']/text()")
-  #data
-  data=sapply(data,.estraielemento)
-  data=inDataIT(data)
-  keep=.which.within.date(data,dataI, dataF) 
-#   data=data[keep]
-  wall=wall[keep]
-  n=length(keep)
+  n=nrow(wall)
 
-#   sum(res)
-  res=sapply(cerca.testo, function(txt) length(grep(txt,wall)))
+  res=sapply(cerca.testo, function(txt) length(grep(txt,wall$action)))
   res=c(res,w_postTotali=n)
-#creazione dataset
-"nWall" <- structure(.Data = as.list(res),
-                       names = names(res) ,
-                       row.names = c(1:1),
-                       class = "data.frame")
-  
-#   if(nWall$amicizia==0){  #INGLESE
-#     ans.type2=c("friends","stato","likes","like","shared","link","played","wall")
-#     
-#     res=sapply(ans.type2, function(txt) length(grep(txt,wall)))
-#     #creazione dataset
-#     "nWall" <- structure(.Data = as.list(res),
-#                          names = ans.type,
-#                          row.names = c(1:1),
-#                          class = "data.frame")
-#   }
-#   
-#   if(nWall$amicizia==0){ #SPAGNOLO
-#     ans.type2=c("amigos","estado","piace","like","compartido","link","jugado","diario")
-#     
-#     res=sapply(ans.type2, function(txt) length(grep(txt,wall)))
-#     #creazione dataset
-#     "nWall" <- structure(.Data = as.list(res),
-#                          names = ans.type,
-#                          row.names = c(1:1),
-#                          class = "data.frame")
-# 
-#   }
-#   
-  return(nWall)  
-}
 
-######################
-getWall <- function(percorso, dataI, dataF){
-  percorso=.fixPercorso(percorso)
-  
-  perW=paste(percorso,"/html/wall.htm", sep="")
-  #lettura intero file
-  pg=htmlParse(perW)  
-  #lettura sezione file
-  wall=getNodeSet(pg,"//div[@class='contents']/div/text()")
-  if(length(wall)==0) {
-    "nWall" <- structure(.Data = as.list(rep(NA,length(cerca.testo)+1)),
-                         names = c(names(cerca.testo),"postTotali"),
-                         row.names = c(1:1),
-                         class = "data.frame")
-    return(nWall)}
-  wall=sapply(wall,.estraielemento)
-  #wall
-  #   n=length(wall)
-  data=getNodeSet(pg,"//div[@class='contents']/div/div[@class='meta']/text()")
-  #data
-  data=sapply(data,.estraielemento)
-  data=inDataIT(data)
-  keep=.which.within.date(data,dataI, dataF) 
-  #   data=data[keep]
-  wall=wall[keep]
-  n=length(keep)
-  
-  #   sum(res)
-  res=sapply(cerca.testo, function(txt) length(grep(txt,wall)))
-  res=c(res,postTotali=n)
   #creazione dataset
   "nWall" <- structure(.Data = as.list(res),
                        names = names(res) ,
                        row.names = c(1:1),
                        class = "data.frame")
+  
   return(nWall)  
+}
+
+######################
+getWall <- function(percorso=".",dataI=NULL, dataF=NULL){
+  percorso=myFBr:::.fixPercorso(percorso)
+  
+  percorso=paste(percorso,"/html/wall.htm", sep="")
+  #lettura intero file
+  dumFun <- function(x){
+    # xname <- xmlName(x)
+    # xattrs <- xmlAttrs(x)
+    sapply(xmlChildren(x), xmlValue)
+  }
+  dum <- XML::xmlParse(percorso)
+  out=xpathSApply(dum, "//div[@class='contents']/div/p", dumFun)
+  res=sapply(out,
+             function(x) c(time=x[[1]],action=x[[2]],text=ifelse(length(x)>2,x[[3]],NA)))
+  res=data.frame(t(res),stringsAsFactors = FALSE)
+  
+  res$time=inDataIT(res$time)
+  keep=.which.within.date(res$time,dataI, dataF)
+  res=res[keep,]
+  return(res)  
 }

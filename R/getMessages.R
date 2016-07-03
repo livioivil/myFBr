@@ -11,6 +11,39 @@
 ##' 
 ##' @author Davide Meneghetti, Livio Finos
 
+# getMessages2 <- function(percorso=".",dataI=NULL, dataF=NULL){
+#     percorso=myFBr:::.fixPercorso(percorso)
+#     
+#     percorsoMess=paste(percorso,"/html/messages.htm", sep="")
+#     #lettura intero file
+#     dumFun <- function(x){
+#       # xname <- xmlName(x)
+#       # xattrs <- xmlAttrs(x)
+#       sapply(xmlChildren(x), xmlValue)
+#       
+#       c(sapply(xmlChildren(x), function(xx){browser();  getNodeSet(xx,"div[@class='message_header']/span/text()") else xmlValue}))
+#     }
+#     dum <- XML::xmlParse(percorsoMess)
+#     out=xpathSApply(dum, "//div[@class='thread']", dumFun)
+#     
+#     header=sapply(getNodeSet(dum,"//div[@class='message_header']/span/text()"),xmlValue)
+#     length(header)/2
+#     
+#     text=sapply(getNodeSet(dum,"//p/text()"),xmlValue)
+#     str(text)
+#     
+#     res=sapply(out,
+#                function(x) c(time=x[[1]],action=x[[2]],text=x[[3]]))
+#     res=data.frame(t(res),stringsAsFactors = FALSE)
+#     
+#     res$time=inDataIT(res$time)
+#     keep=.which.within.date(res$time,dataI, dataF)
+#     res=res[keep,]
+#     res$text[res$text=="p"]=NA
+#     return(res)  
+#   }
+  
+  
 getMessages <- function (percorso, dataI = NULL, dataF = NULL)
 {
   percorso = fixPath(percorso)
@@ -71,19 +104,6 @@ getMessages <- function (percorso, dataI = NULL, dataF = NULL)
 
 
 
-
 getNMessages <- function(percorso,dataI=NULL,dataF=NULL){
-  percorso=.fixPercorso(percorso)
-  perM=paste(percorso,"/html/messages.htm", sep="")
-  if(!("messages.htm"%in%dir(paste(percorso,"/html", sep=""))))
-    return(NA)
-  #lettura intero file
-  pg=htmlParse(perM)
-  #lettura nodi file
-  meta=getNodeSet(pg,"//div/span[@class='meta']/text()")
-    
-  meta=.estraielementi(meta)
-  
-  nmess=length(.which.within.date(inDataIT(meta),dataI, dataF))
-  return(nmess)
+  nrow(getMessages(percorso,dataI=NULL,dataF=NULL))
 }
