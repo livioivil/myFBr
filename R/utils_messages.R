@@ -113,8 +113,9 @@ getMessages_summary_string_counts <- function(mess,stringhe=NULL){
                                                                    stringa))
     colSums(as.data.frame(conteggi))
   }
-  list(user_grp=fun_temp(mess[(mess$user==nome_utente)&(mess$gruppo),]),
-       user_personal=fun_temp(mess[(mess$user==nome_utente)&(!mess$gruppo),]),
-       others_grp=fun_temp(mess[(mess$user!=nome_utente)&(mess$gruppo),]),
-  others_personal=fun_temp(mess[(mess$user!=nome_utente)&(!mess$gruppo),]))
+  list(user_grp=fun_temp(mess[(mess$user==nome_utente)&(mess$gruppo==TRUE),]),
+       user_personal=fun_temp(mess[(mess$user==nome_utente)&(mess$gruppo==FALSE
+                                                             ),]),
+       others_grp=fun_temp(mess[(!(mess$user==nome_utente))&(mess$gruppo==TRUE),]),
+  others_personal=fun_temp(mess[(!(mess$user==nome_utente))&(mess$gruppo==FALSE),]))
 }
