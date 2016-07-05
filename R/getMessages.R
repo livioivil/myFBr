@@ -43,7 +43,7 @@
 #     return(res)  
 #   }
   
-  
+ 
 getMessages <- function (percorso, dataI = NULL, dataF = NULL)
 {
   percorso = fixPath(percorso)

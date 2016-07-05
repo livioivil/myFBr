@@ -109,7 +109,7 @@ getMessages_summary_string_counts <- function(mess,stringhe=NULL){
   nome_utente = myFBr:::get_owner_from_threads(mess)
   
   fun_temp <- function(dati){
-    conteggi = plyr::llply(stringhe, function(stringa) stringr::str_count(mess_utente$text, 
+    conteggi = plyr::llply(stringhe, function(stringa) stringr::str_count(dati$text, 
                                                                    stringa))
     colSums(as.data.frame(conteggi))
   }
