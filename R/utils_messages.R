@@ -119,3 +119,48 @@ getMessages_summary_string_counts <- function(mess,stringhe=NULL){
        others_grp=fun_temp(mess[(!(mess$user==nome_utente))&(mess$gruppo==TRUE),]),
   others_personal=fun_temp(mess[(!(mess$user==nome_utente))&(mess$gruppo==FALSE),]))
 }
+
+
+mode <- function(x) as.numeric(names(which.max(table(x))))
+
+
+#' @name activity_time_summary
+#' @export activity_time_summary
+#' @aliases activity_time_summary
+#' @title summary of activities over time
+#' @description  funtions which decrive the activities over time
+#' @param action_time a vector of POSIXct elements refering to the time of the activities.
+#' @param dataI minimum date to be considered (POSIXct format)
+#' @param dataF maximum date to be considered (POSIXct format)
+#' 
+activity_time_summary <- function(action_times,dataI=NULL,dataF=NULL){
+  if(is.null(dataI))
+    dataI=as.Date(min(action_times))
+  if(is.null(dataF))
+    dataF=as.Date(max(action_times))
+  
+  
+  giorni=as.character(seq(dataI,dataF,by=1))
+  giorni_mess=factor(as.Date(action_times),levels = giorni)
+  
+  table_acts_per_day=table(giorni_mess)
+  
+  days_off=days_off_summary(table_acts_per_day)
+  
+  acts_day=some_statistics(table_acts_per_day)
+  mean_acts_day_0excl=some_statistics(table_acts_per_day[table_acts_per_day>0])
+  c(days_off,mean_acts_day,mean_acts_day_0excl)
+}
+# table(table(cumsum(table_acts_per_day)))-1
+
+days_off_summary <- function(table_acts_per_day){
+  
+  tab=table(cumsum(table_acts_per_day))-1
+  
+  giorni_inattivita =tab[tab>0]
+  if((names(tab)[1]==0)&(tab[1]==1))
+    giorni_inattivita=c(1,giorni_inattivita)
+  
+  c(prop_inactive=mean(table_acts_per_day==0) ,some_statistics(giorni_inattivita))
+  
+}

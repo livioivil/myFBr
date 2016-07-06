@@ -1,10 +1,11 @@
 #' @names Gini
 #' @aliases Gini
-#' @description
+#' @description It computes Gini Index
 #' @title Gini 
-#' @param user
-#' @param n_mess
+#' @param user 
+#' @param n_mess 
 #' @param k ? il numero di modalit?, in questo caso il numero di amici totali che scrivono
+#' @param 
 #' @export
 
 

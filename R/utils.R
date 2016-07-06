@@ -55,3 +55,9 @@
   {sesso="F"}
   sesso
 }
+
+
+some_statistics <- function(values){
+  q=quantile(values,c(0,.25,.5,.75,1))
+  c(mean=mean(values),mode= mode(values),sd=sd(values),q=q)
+}

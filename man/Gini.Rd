@@ -7,6 +7,13 @@
 Gini(user, n_mess = NULL, k = NULL, adjusted = TRUE)
 }
 \arguments{
+\item{user}{}
+
+\item{n_mess}{}
+
 \item{k}{? il numero di modalit?, in questo caso il numero di amici totali che scrivono}
+}
+\description{
+It computes Gini Index
 }
 
