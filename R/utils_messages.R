@@ -142,14 +142,22 @@ activity_time_summary <- function(action_times,dataI=NULL,dataF=NULL){
   
   giorni=as.character(seq(dataI,dataF,by=1))
   giorni_mess=factor(as.Date(action_times),levels = giorni)
-  
   table_acts_per_day=table(giorni_mess)
-  
   days_off=days_off_summary(table_acts_per_day)
-  
   acts_day=some_statistics(table_acts_per_day)
-  mean_acts_day_0excl=some_statistics(table_acts_per_day[table_acts_per_day>0])
-  c(days_off,mean_acts_day,mean_acts_day_0excl)
+  acts_day_0excl=some_statistics(table_acts_per_day[table_acts_per_day>0])
+  
+  
+  weeks=as.character(strftime(seq(dataI,dataF,by=7),format="%W-%Y")) 
+  week_mess=factor(strftime(action_times,format="%W-%Y") ,levels = weeks)
+  table_acts_per_week=table(week_mess)
+  week_off=days_off_summary(table_acts_per_week)
+  acts_week=some_statistics(table_acts_per_week)
+  acts_week_0excl=some_statistics(table_acts_per_week[table_acts_per_week>0])
+  
+  
+  c(days_off=days_off,week_off=week_off,acts_day=acts_day,
+    acts_day_0excl=acts_day_0excl,acts_week=acts_week,acts_week_0excl=acts_week_0excl)
 }
 # table(table(cumsum(table_acts_per_day)))-1
 
