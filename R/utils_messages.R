@@ -10,9 +10,9 @@
 get_group_threads <- function(mess){
   nomi_threads=strsplit(levels(mess$thread),",")
   thread_gruppo=sapply(nomi_threads,length)>2
-  thread_gruppo=factor(thread_gruppo)
-  levels(thread_gruppo)=c("TRUE","FALSE")
-  thread_gruppo
+  gruppo=mess$thread
+  levels(gruppo)=thread_gruppo
+  gruppo
 }
 
 get_owner_from_threads <- function(mess){
