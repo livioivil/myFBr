@@ -1,9 +1,18 @@
+#' @export get_group_threads get_owner_from_threads
+#' @name get_group_threads
+#' @aliases get_group_threads
+#' @aliases get_owner_from_threads
+#' @author Caterina Ciampanelli, Anna Petrina, Livio Finos
+#' @param mess a data.frame as given by \code{getMessages} 
+#' @title get infos from threads
+#' @description  \code{get_owner_from_threads} return the name of the user, \code{get_group_threads} return a TRUE/FALSE factor indicating if the chat coms from a group (TRUE) or a personal (FALSE) chat.
+
 get_group_threads <- function(mess){
   nomi_threads=strsplit(levels(mess$thread),",")
-  gruppo = mess$thread
   thread_gruppo=sapply(nomi_threads,length)>2
-  levels(gruppo)=thread_gruppo
-  gruppo
+  factor(thread_gruppo)=factor(thread_gruppo)
+  levels(thread_gruppo)=c("TRUE","FALSE")
+  thread_gruppo
 }
 
 get_owner_from_threads <- function(mess){
@@ -134,6 +143,15 @@ mode <- function(x) as.numeric(names(which.max(table(x))))
 #' @param dataF maximum date to be considered (POSIXct format)
 #' 
 activity_time_summary <- function(action_times,dataI=NULL,dataF=NULL){
+  if(length(action_times)==0) return(
+    c(days_off=days_off_summary(c()),
+    week_off=days_off_summary(c()),
+    acts_day=some_statistics(c()),
+    acts_day_0excl=some_statistics(c()),
+    acts_week=some_statistics(c()),
+    acts_week_0excl=some_statistics(c()))
+  )
+
   if(is.null(dataI))
     dataI=as.Date(min(action_times))
   if(is.null(dataF))
@@ -162,7 +180,7 @@ activity_time_summary <- function(action_times,dataI=NULL,dataF=NULL){
 # table(table(cumsum(table_acts_per_day)))-1
 
 days_off_summary <- function(table_acts_per_day){
-  
+  if(length(table_acts_per_day)==0) return(c(prop_inactive=NA ,some_statistics(c())))
   tab=table(cumsum(table_acts_per_day))-1
   
   giorni_inattivita =tab[tab>0]

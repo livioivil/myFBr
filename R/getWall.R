@@ -55,12 +55,17 @@ getWall <- function(percorso=".",dataI=NULL, dataF=NULL){
   }
   dum <- XML::xmlParse(percorso)
   out=xpathSApply(dum, "//div[@class='contents']/div/p", dumFun)
-  res=sapply(out,
-             function(x) c(time=x[[1]],action=x[[2]],text=ifelse(length(x)>2,x[[3]],NA)))
-  res=data.frame(t(res),stringsAsFactors = FALSE)
-  
-  res$time=inDataIT(res$time)
-  keep=.which.within.date(res$time,dataI, dataF)
-  res=res[keep,]
-  return(res)  
+  if(length(out)==0){ 
+    temp=data.frame(time=as.POSIXct("2015-10-11 22:10:00"),action="",text="")
+    return(temp[-1,])
+    } else{
+    res=sapply(out,
+               function(x) c(time=x[[1]],action=ifelse(length(x)>1,x[[2]],NA),text=ifelse(length(x)>2,x[[3]],NA)))
+    res=data.frame(t(res),stringsAsFactors = FALSE)
+    
+    res$time=inDataIT(res$time)
+    keep=.which.within.date(res$time,dataI, dataF)
+    res=res[keep,]
+    return(res) 
+  } 
 }
