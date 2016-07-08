@@ -10,7 +10,7 @@
 get_group_threads <- function(mess){
   nomi_threads=strsplit(levels(mess$thread),",")
   thread_gruppo=sapply(nomi_threads,length)>2
-  factor(thread_gruppo)=factor(thread_gruppo)
+  thread_gruppo=factor(thread_gruppo)
   levels(thread_gruppo)=c("TRUE","FALSE")
   thread_gruppo
 }
