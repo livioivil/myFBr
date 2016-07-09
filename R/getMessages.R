@@ -43,14 +43,7 @@
 #     return(res)  
 #   }
   
- 
-getMessages <- function (percorso, dataI = NULL, dataF = NULL)
-{
-  percorso = fixPath(percorso)
-  perM = paste(percorso, "/html/messages.htm", sep = "")
-  if (!("messages.htm" %in% dir(paste(percorso, "/html", sep = ""))))
-    return(data.frame(time = NA, user = NA, text = NA)[-1,])
-  
+.getMessages_htm <- function(perM,dataI,dataF){
   pg = htmlParse(perM)
   
   threads=getNodeSet(pg, "//div/div[@class='thread']")
@@ -99,7 +92,48 @@ getMessages <- function (percorso, dataI = NULL, dataF = NULL)
   meta$text = gsub("</p> $", "", meta$text)
   meta$text[meta$text=="<p/> "]=""
   meta$thread = factor(unlist(myFBr:::.estraielementi(thread)))
-  return(meta)
+  meta
+}
+ 
+getMessages <- function (percorso, dataI = NULL, dataF = NULL)
+{
+  percorso = fixPath(percorso)
+  perM = paste(percorso, "/html/messages.htm", sep = "")
+  if (!("messages.htm" %in% dir(paste(percorso, "/html", sep = ""))))
+    return(data.frame(time = NA, user = NA, text = NA)[-1,])
+
+  ########################
+  dum <- try(XML::xmlParse(perM),silent = TRUE)
+  if(!is(dum, "try-error")){  
+    dumFun <- function(x) {
+      sapply(xmlChildren(x),xmlValue)
+    }
+    out2 = xpathSApply(dum, "//div[@class='contents']/div/div[@class='thread']/div/div/span", dumFun)
+    if (length(out2) == 0) {
+      temp = data.frame(user="", time = as.POSIXct("2015-10-11 22:10:00"),
+                        text = "", thread = "")
+      return(temp[-1, ])
+    }
+    
+    out2=data.frame(matrix(out2,ncol = 2,byrow = TRUE))
+    names(out2)=c("user","time")
+    out2$time=myFBr:::inDataIT(out2$time)
+    keep = myFBr:::.which.within.date(out2$time, dataI, dataF)
+    out2 = out2[keep, ]
+    
+    out1 = xpathSApply(dum, "//div[@class='contents']/div/div[@class='thread']", dumFun)
+    out1=sapply(out1,function(ou)  cbind(thread=ou[1], text=ou[names(ou)=="p"]))
+    out1.1=unlist(sapply(out1,function(ou) ou[,1]))[keep]
+    out1.2=unlist(sapply(out1,function(ou) ou[,2]))[keep]
+    # head(out1)
+    
+    out2$text=out1.2
+    out2$thread=out1.1
+  } else
+    {
+      out2=.getMessages_htm(perM=perM,dataI=dataI,dataF=dataF)  
+  }
+  return(out2)
 }
 
 
