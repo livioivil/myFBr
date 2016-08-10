@@ -128,7 +128,7 @@ getMessages <- function (percorso, dataI = NULL, dataF = NULL)
     # head(out1)
     
     out2$text=out1.2
-    out2$thread=out1.1
+    out2$thread=factor(out1.1)
   } else
     {
       out2=.getMessages_htm(perM=perM,dataI=dataI,dataF=dataF)  

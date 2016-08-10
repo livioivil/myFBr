@@ -16,7 +16,7 @@ get_group_threads <- function(mess){
 }
 
 get_owner_from_threads <- function(mess){
-  nomi_threads=strsplit(levels(mess$thread),",")
+  nomi_threads=strsplit(levels(factor(mess$thread)),",")
   nome_utente=names(which.max(table(unlist(nomi_threads[mess$gruppo=="FALSE"]))))
   nome_utente=gsub("^ ","",nome_utente)
   nome_utente=gsub(" $","",nome_utente)
