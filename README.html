@@ -121,7 +121,7 @@ $(document).ready(function () {
 
 <div id="welcome-to-the-myfbr" class="section level1">
 <h1>Welcome to the myFBr</h1>
-<p>myFBr is a R library specifically developed to extract information from Facebook profiles. This library contains codes able to read information from the html pages, to transform such information into quantitative data, and to save data in a dataset. As an example, table 1 shows the data about <em>friends</em> which can be extracted.</p>
+<p>myFBr is a R library specifically developed to extract information from Facebook profiles. This library contains codes able to read information from the html pages, to transform such information into quantitative data, and to save data in a dataset. As an example, the image below shows the data about <em>friends</em> which can be extracted.</p>
 <hr />
 <div id="set-up" class="section level2">
 <h2>Set up</h2>
@@ -135,36 +135,14 @@ install_github(&quot;livioivil/myFBr&quot;)</code></pre>
 <div id="some-examples" class="section level2">
 <h2>Some examples</h2>
 <pre class="r"><code>library(myFBr)
-getMessages_summary</code></pre>
-<pre><code>## function (mess) 
-## {
-##     n_mess = length(mess$text)
-##     tab_user = sort(table(mess$user), decreasing = TRUE)
-##     n_user = length(tab_user)
-##     mess_medi = n_mess/n_user
-##     freq_user = tab_user[1:3]
-##     freq_ore = table(format(mess$time, &quot;%H&quot;))
-##     freq_data = table(as.Date(mess$time))
-##     freq_giorni = table(weekdays(mess$time))
-##     freq_giorni = freq_giorni[c(&quot;lunedì&quot;, &quot;martedì&quot;, &quot;mercoledì&quot;, 
-##         &quot;giovedì&quot;, &quot;venerdì&quot;, &quot;sabato&quot;, &quot;domenica&quot;)]
-##     a = summary.txts(mess$text)
-##     Gini = Gini(mess$user)
-##     data(vocabolarioNomiPropri)
-##     genere = TextWiller::classificaUtenti(c(names(table(mess$user))), 
-##         vocabolario = vocabolarioNomiPropri)
-##     indice1 = which(genere == &quot;masc&quot;)
-##     indice2 = which(genere == &quot;femm&quot;)
-##     maschi = length(indice1)
-##     femmine = length(indice2)
-##     v = list(n_mess = n_mess, n_user = n_user, Gini = Gini, maschi = maschi, 
-##         femmine = femmine, char_info = a$statistics, freq_user = freq_user, 
-##         freq_ore = freq_ore, freq_giorni = freq_giorni, freq_emoticons = a$freq_emoticons, 
-##         most_words = sort(a$freq_parole, decreasing = TRUE)[1:10])
-##     v = as.vector(v, mode = &quot;any&quot;)
-##     return(v)
-## }
-## &lt;environment: namespace:myFBr&gt;</code></pre>
+path=system.file(&quot;extdata&quot;,&quot;example.zip&quot;,package = &quot;myFBr&quot;)
+getInfo(path)</code></pre>
+<pre><code>## Warning in fixPath(percorso): The path has been modified to: /.//
+## DESCRIPTION/NA/NA/NA/NA/NA/NA/NA/NA/NA/NA</code></pre>
+<pre><code>##   nome email dataReg dataDownload sesso dataNascita cittaNatale
+## 1   NA  NULL    &lt;NA&gt;         &lt;NA&gt;    NA        &lt;NA&gt;        NULL
+##   situazSentim
+## 1         NULL</code></pre>
 </div>
 <div id="how-to-download-your-fb-profile-as-a-zip-file" class="section level2">
 <h2>How to download your FB profile as a zip file</h2>
