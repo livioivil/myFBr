@@ -1,5 +1,7 @@
 
 # Welcome to the myFBr 
+myFBr is a R library specifically developed to extract information from Facebook profiles. This library contains codes able to read information from the html pages, to transform such information into quantitative data, and to save data in a dataset. 
+As an example, the image below shows the data about *friends* which can be extracted.
 
 
 * * *
@@ -20,5 +22,19 @@ To **install** this github version type (in R):
 
 ```{r,  message = FALSE}
 library(myFBr)
-getDati
+path=system.file("extdata","example.zip",package = "myFBr")
+getMessages_summary(path)
 ```
+
+## How to download your FB profile as a zip file
+
+myFBr uses a copy of Facebook data downloaded from your Facebook profile  (see Figure 1). Use the function 'download a copy of your Facebook data' in the settings section of your Facebook profile (full instructions for downloading data from Facebook accounts are presented in the following official Facebook link: https://www.facebook.com/help/131112897028467/ ; see Figure 1). You will have to download a zip folder containing several html pages. They included friendship activities, events, wall activities, text messages, photos, ect.
+
+
+![Figure 1. 'Downloading Your Info' page on Facebook
+(https://www.facebook.com/help/131112897028467 )
+](./docs/download.png)
+
+
+They included friendship activities, events, wall activities, and text messages. A full description of the variables is provided here
+![](./docs/table.jpg)

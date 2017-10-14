@@ -8,7 +8,6 @@
 ##' @param dataF data di fine di riferimento 
 ##' @return dataset (1x20) contenente le informazioni del profilo compresi fra 2 date
 ##' @export getAnagrafica
-##' @title getAnagrafica
 ##' 
 ##' @author Davide Meneghetti
 

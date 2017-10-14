@@ -27,4 +27,3 @@ Funzione NON valida per profili scritti in lingua inglese o spagnola, facile da 
 \author{
 Davide Meneghetti, Livio Finos
 }
-

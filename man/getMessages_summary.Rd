@@ -17,4 +17,3 @@ a list with few summary statistics
 \author{
 Caterina Ciampanelli, Livio Finos
 }
-

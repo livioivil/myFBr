@@ -1,4 +1,4 @@
-#' @names getMessages_summary
+#' @name getMessages_summary
 #' @title getMessages_summary
 #' @param mess result of a call of \code{getMessages}.
 #' @param percorso stringa che indica il percorso della cartella dei dati del profilo

@@ -23,4 +23,3 @@ tipi di evento: confermato, forse, rifiutato, non risposto.
 \author{
 Davide Meneghetti
 }
-

@@ -21,4 +21,3 @@ Funzione che dato il percorso dei dati del profilo facebook il numero di amici(p
 \author{
 Davide Meneghetti
 }
-

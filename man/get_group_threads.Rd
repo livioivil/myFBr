@@ -15,4 +15,3 @@ get_group_threads(mess)
 \author{
 Caterina Ciampanelli, Anna Petrina, Livio Finos
 }
-

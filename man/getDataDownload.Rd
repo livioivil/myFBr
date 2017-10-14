@@ -18,4 +18,3 @@ Funzione che dato il percorso dei dati del profilo facebook ritorna la data di d
 \author{
 Livio Finos
 }
-

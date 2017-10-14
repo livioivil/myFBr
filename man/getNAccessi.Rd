@@ -23,4 +23,3 @@ Funzione che dato il percorso dei dati del profilo facebook ritorna il numero se
 \author{
 Davide Meneghetti
 }
-

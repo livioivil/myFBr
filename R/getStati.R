@@ -1,4 +1,4 @@
-# funzione per il numero di posti in cui è stata 
+# funzione per il numero di posti in cui ? stata 
 getStati<-function(percorso){
   #numero stati
   perA=paste(percorso,"/html/wall.htm", sep="")
@@ -11,9 +11,5 @@ getStati<-function(percorso){
                        names = c("N.Stati"),
                        row.names = c(1:1),
                        class = "data.frame")
-  
-  
   return(stati)
-  
 }
-

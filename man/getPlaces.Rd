@@ -22,4 +22,3 @@ Funzione che dato il percorso dei dati del profilo facebook ritorna il numero di
 \author{
 Davide Meneghetti, Livio Finos
 }
-

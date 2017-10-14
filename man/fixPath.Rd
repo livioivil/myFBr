@@ -22,4 +22,3 @@ Validity check (and fix) for files path
 \author{
 Livio Finos
 }
-

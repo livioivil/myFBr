@@ -24,4 +24,3 @@ n. di attivit? del wall delle varie categorie, n. di eventi con varia risposta, 
 \author{
 Davide Meneghetti
 }
-

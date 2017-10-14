@@ -18,4 +18,3 @@ traduce una data estesa letta come stringa da facebook in italiano e la restitui
 \author{
 Davide Meneghetti
 }
-

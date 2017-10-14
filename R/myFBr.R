@@ -9,5 +9,8 @@
 #' @docType package
 #' @name myFBr
 #' @import XML
+#' @examples 
+#' path=system.file("extdata","example.zip",package = "myFBr")
+#' getInfo(path)
 NULL
 #> NULL

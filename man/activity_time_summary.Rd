@@ -16,4 +16,3 @@ activity_time_summary(action_times, dataI = NULL, dataF = NULL)
 \description{
 funtions which decrive the activities over time
 }
-

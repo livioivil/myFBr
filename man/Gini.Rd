@@ -16,4 +16,3 @@ Gini(user, n_mess = NULL, k = NULL, adjusted = TRUE)
 \description{
 It computes Gini Index
 }
-

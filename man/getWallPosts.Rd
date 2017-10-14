@@ -18,4 +18,3 @@ Funzione che dato il percorso dei dati del profilo facebook ritorna i post pubbl
 \author{
 Davide Meneghetti, Livio Finos
 }
-

@@ -24,4 +24,3 @@ comprese fra 2 date.(NON ANCORA IMPLEMENTATA)
 \author{
 Davide Meneghetti, Livio Finos
 }
-
