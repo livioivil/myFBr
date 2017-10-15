@@ -45,8 +45,7 @@ getWall_summary <- function(wall){
 ######################
 getWall <- function(percorso=".",dataI=NULL, dataF=NULL){
   percorso=myFBr:::.fixPercorso(percorso)
-  
-  percorso=paste(percorso,"/html/wall.htm", sep="")
+  percorso=.getWallPath(percorso)
   #lettura intero file
   dumFun <- function(x){
     # xname <- xmlName(x)

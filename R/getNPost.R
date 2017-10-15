@@ -12,7 +12,7 @@
 
 getNPost <- function(percorso,dataI=NULL,dataF=NULL){
   percorso=.fixPercorso(percorso)
-  perW=paste(percorso,"/html/wall.htm", sep="")
+  perW=.getWallPath(percorso)
   pg=htmlParse(perW)
   atti=getNodeSet(pg,"//div[@class='meta']/text()")
   if(length(atti)==0) return(NA)

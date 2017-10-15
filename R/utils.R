@@ -10,6 +10,14 @@
   fixPath(percorso)
 }
 
+.getWallPath <- function(percorso){
+  if("wall.htm"%in%dir(paste(percorso,"/html", sep=""))){
+    perW=paste(percorso,"/html/wall.htm", sep="")
+  } else {
+    perW=paste(percorso,"/html/timeline.htm", sep="")
+  }
+  perW
+}
 
 .which.within.date.null <- function(a,dataI,dataF){
   if(is.null(dataI)&is.null(dataF)) return(NULL)

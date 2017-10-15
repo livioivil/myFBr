@@ -16,5 +16,5 @@ The foo functions ...
 
 \examples{
 path=system.file("extdata","example.zip",package = "myFBr")
-getMessages_summary(path)
+getInfo(path)
 }

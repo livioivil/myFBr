@@ -12,8 +12,7 @@
 getWallPosts <- function(percorso){
   percorso=.fixPercorso(percorso)
   
-  
-  perW=paste(percorso,"/html/wall.htm", sep="")
+  perW=.getWallPath(percorso)
   #lettura intero file
   pg=htmlParse(perW)  
   #lettura sezione file

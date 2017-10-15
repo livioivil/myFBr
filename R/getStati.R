@@ -1,7 +1,7 @@
 # funzione per il numero di posti in cui ? stata 
 getStati<-function(percorso){
   #numero stati
-  perA=paste(percorso,"/html/wall.htm", sep="")
+  perA=.getWallPath(percorso)
   #lettura intero file
   pg=htmlParse(perA)
   
