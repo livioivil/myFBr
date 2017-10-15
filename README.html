@@ -135,14 +135,12 @@ install_github(&quot;livioivil/myFBr&quot;)</code></pre>
 <div id="some-examples" class="section level2">
 <h2>Some examples</h2>
 <pre class="r"><code>library(myFBr)
-path=system.file(&quot;extdata&quot;,&quot;example.zip&quot;,package = &quot;myFBr&quot;)
-getInfo(path)</code></pre>
-<pre><code>## Warning in fixPath(percorso): The path has been modified to: /.//
-## DESCRIPTION/NA/NA/NA/NA/NA/NA/NA/NA/NA/NA</code></pre>
-<pre><code>##   nome email dataReg dataDownload sesso dataNascita cittaNatale
-## 1   NA  NULL    &lt;NA&gt;         &lt;NA&gt;    NA        &lt;NA&gt;        NULL
-##   situazSentim
-## 1         NULL</code></pre>
+path=system.file(&quot;extdata&quot;,&quot;example&quot;,package = &quot;myFBr&quot;)
+(getInfo(path))</code></pre>
+<pre><code>##                       nome                email             dataReg
+## 1 matescienze.summerschool livio.finos@unipd.it 2014-08-27 23:56:00
+##          dataDownload sesso dataNascita          cittaNatale situazSentim
+## 1 2017-10-14 17:20:00     F  1976-09-01 San Pellegrino Terme         NULL</code></pre>
 </div>
 <div id="how-to-download-your-fb-profile-as-a-zip-file" class="section level2">
 <h2>How to download your FB profile as a zip file</h2>
