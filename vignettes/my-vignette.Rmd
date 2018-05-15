@@ -48,7 +48,7 @@ pander(wall_summ)
 
 ddwh=data.frame(wall_summ$freq_ore)
 names(ddwh)=c("h","fr")
-ggplot(ddwh, aes(x=h, y=fr)) + geom_line(col="red")+
+ggplot(ddwh, aes(x=h, y=fr)) + geom_line(colour="red")+
   ggtitle("Attivita' Bacheca per ore del giorno")#+ geom_line(col="cyan")
 
 

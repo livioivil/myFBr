@@ -202,7 +202,7 @@ summary_freq_events_week_hour<-function(mess){
   freq_ore=prop.table(table(temp))
   names(dimnames(freq_ore))[1]=""
   
-  giorni=wday(mess$time, label=TRUE) #weekdays(mess$time)
+  giorni=lubridate::wday(mess$time, label=TRUE) #weekdays(mess$time)
   # giorni=gsub(".$","",giorni)
   levels(giorni)=c("luned","marted","mercoled","gioved","venerd","sabat","domenic")
   # temp=factor(giorni,levels=c("luned","marted","mercoled","gioved","venerd","sabat","domenic"))
