@@ -202,9 +202,10 @@ summary_freq_events_week_hour<-function(mess){
   freq_ore=prop.table(table(temp))
   names(dimnames(freq_ore))[1]=""
   
-  giorni=weekdays(mess$time)
-  giorni=gsub(".$","",giorni)
-  temp=factor(giorni,levels=c("luned","marted","mercoled","gioved","venerd","sabat","domenic"))
+  giorni=wday(mess$time, label=TRUE) #weekdays(mess$time)
+  # giorni=gsub(".$","",giorni)
+  levels(giorni)=c("luned","marted","mercoled","gioved","venerd","sabat","domenic")
+  # temp=factor(giorni,levels=c("luned","marted","mercoled","gioved","venerd","sabat","domenic"))
   freq_giorni=prop.table(table(temp))
   names(dimnames(freq_giorni))[1]=""
   # barplot(freq_giorni[1:7])
