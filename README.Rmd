@@ -23,7 +23,7 @@ To **install** this github version type (in R):
 ```{r,  message = FALSE}
 library(myFBr)
 path=system.file("extdata","example",package = "myFBr")
-(getInfo(path))
+t(getInfo(path))
 ```
 
 ## How to download your FB profile as a zip file
