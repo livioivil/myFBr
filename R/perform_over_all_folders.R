@@ -21,8 +21,9 @@ single_analysis <- function(cart){
         cat("\n errore per ", nome_file,"!!!")
         return(res)
       } else{
-        cat("done.")
-        save(file = paste(dir_repos,sep="",nome_file), res)
+        file_dir=paste(dir_repos,sep="",nome_file)
+        cat("done. Now saving on ", file_dir)
+        save(file = file_dir, res)
         return(TRUE)
       }
     } else {cat(" già presente")
@@ -32,8 +33,11 @@ single_analysis <- function(cart){
   
   
   res=mclapply( dir_list, single_analysis)
+  
   cat("\n Total number of folders:",length(res))
-  cat("\n Number of with non error status:",sum(sapply(res,function(i)i),na.rm=TRUE))
+  num_errs=try(sum(sapply(res,function(i)i),na.rm=TRUE),silent = TRUE)
+  if(is(num_errs,"try-error")) num_errs=0
+  cat("\n Number of with non error status:",num_errs)
   cat("\n Number of folder not processed (because already present):",sum(sapply(res,is.na)))
   cat("\n Number of encontered erros:",sum(sapply(res,function(i) is(i,"try-error"))))
   TRUE

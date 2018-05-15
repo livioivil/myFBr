@@ -9,7 +9,7 @@
 inDataIT <- function(a){
   #Date italiane
   a=gsub(" alle ore","", a )
-  a=gsub("^(\\w+) ","", a )
+  a=gsub("^\\w+(|.) ","", a )
   #   a=gsub("-",":", a )
   a=gsub("gennaio","01", a )
   a=gsub("febbraio","02", a )

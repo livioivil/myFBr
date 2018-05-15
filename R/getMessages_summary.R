@@ -14,25 +14,18 @@ getMessages_summary=function(mess){
   # user=mess$user
   tab_user= sort(table(mess$user),decreasing = TRUE)
   n_user=length(tab_user)
-  mess_medi=n_mess/n_user
-  freq_user=tab_user[1:3]
+  mess_medi_friend=n_mess/n_user
+  freq_user=tab_user[1:3]/n_mess
+  names(freq_user)=c("freqFriend1","freqFriend2","freqFriend3")
   
-  freq_ore=table(format(mess$time, "%H"))
-  # barplot(freq_ore,las=3)
-  
-  freq_data=table(as.Date(mess$time))
-  # barplot(freq_data,las=3)
-  
-  freq_giorni=table(weekdays(mess$time))
-  freq_giorni=freq_giorni[c("lunedì","martedì","mercoledì","giovedì","venerdì","sabato","domenica")]
-  # barplot(freq_giorni[1:7])
-  
+  summary_freq_evets=summary_freq_events_week_hour(mess)
   a=summary.txts(mess$text)
   
   Gini=Gini(mess$user)
   
   #alto-->tutte le modalità hanno numerosità simili
   #basso-->la frequenza totale è concentrata in poche modalità
+  require(TextWiller)
   data(vocabolarioNomiPropri)
   genere=TextWiller::classificaUtenti(c(names(table(mess$user))),vocabolario=vocabolarioNomiPropri)
   indice1=which(genere=="masc")
@@ -41,10 +34,16 @@ getMessages_summary=function(mess){
   femmine=length(indice2)
   
   
-  v=list(n_mess=n_mess,n_user=n_user,Gini=Gini,maschi=maschi,femmine=femmine,
-         char_info=a$statistics,freq_user=freq_user,
-         freq_ore=freq_ore,freq_giorni=freq_giorni,
-         freq_emoticons=a$freq_emoticons,most_words=sort(a$freq_parole,decreasing = TRUE)[1:10])
+  v=list(n_user=n_user,
+         mess_medi_friend=mess_medi_friend,
+         nchar_stats=a,
+         Gini_freq_user=Gini,
+         MFprops=c(maschi=maschi/(maschi+femmine),
+                   femmine=femmine/(maschi+femmine)),
+         freq_user=freq_user,
+         freq_ore=summary_freq_evets$freq_ore,
+         freq_giorni=summary_freq_evets$freq_giorni,
+         n_days_active=summary_freq_evets$n_days_active)
   v=as.vector(v,mode="any")
   return(v)
 }

@@ -37,7 +37,7 @@ char_emoticons=c(EMOTEGOOD="\\:\\)+|\\:\\-\\)+|\\:\\]+|\\:\\-\\]+|\\=\\)+|\\=\\]
                  EMOTELOVE="\\<3+|<U+2764>|<U+2665>|\\:\\*+",
                  EMOTEBAD="\\:\\(+|\\:\\-\\(+|\\:\\[+|\\:\\-\\[+|\\=\\[+|\\=\\(+|\\:[[:blank:]]\\(|[[:blank:]]\\([[:blank:]]?\\:|\\:\\'+\\(+|\\:\\'\\[|D\\:|\\:\\-\\[|\\:\\|\\:/+|\\=/+|\\:x|\\#\\_+\\#|X\\_+X|x\\_+x|X\\.X|x\\.x|>\\.<|>\\_+<|>\\_+>|>\\.>",
                  EMOTEWINK="\\;\\)+|\\;\\-\\)+|\\;\\]|\\;\\-\\]|\\;\\>|;d+|;D+|;o", 
-                 EMOTESHOCK="O\\.o|o\\.o|O\\.O|o\\.O|O\\_+o|o\\_+o|O\\_+O|o\\_+O|\\:OO+|\\=O+|\\-\\.\\-|u\\.u|u\\.ù|ù\\.u|u\\_+u|çç|ç_+ç|t_+t|ù\\_+ù|ù\\.ù|\\:oo+|0\\_+0|\\=\\_+\\=|\\.\\_+\\.|òò|ò\\_+ò|\\*u+\\*|\\-\\_+\\-|ùù|\\-\\,\\-|\\-\\-\\'|\\.\\-\\.|\\'\\-\\'", 
+                 EMOTESHOCK="O\\.o|o\\.o|O\\.O|o\\.O|O\\_+o|o\\_+o|O\\_+O|o\\_+O|\\:OO+|\\=O+|\\-\\.\\-|u\\.u|u\\.Ã¹|Ã¹\\.u|u\\_+u|Ã§Ã§|Ã§_+Ã§|t_+t|Ã¹\\_+Ã¹|Ã¹\\.Ã¹|\\:oo+|0\\_+0|\\=\\_+\\=|\\.\\_+\\.|Ã²Ã²|Ã²\\_+Ã²|\\*u+\\*|\\-\\_+\\-|Ã¹Ã¹|\\-\\,\\-|\\-\\-\\'|\\.\\-\\.|\\'\\-\\'", 
                  EMOTEAMAZE="\\:P+[^e]|\\:p+[^e]|\\=P+|\\=p+|XD+|xD+|xd+|[[:blank:]]d\\:|\\:P+[^e]|\\:p+[^e]|\\=P+|\\=p+|XD+|xD+|xd+|[[:blank:]]d\\:")
 
 char_non_word=c(domanda="\\?", esclamativo="\\!", virgole_punti="(,|;|\\.)")
@@ -54,10 +54,9 @@ char_wow=c(EMOTEZZZ 	="(#?zz+|#?u+ff[aif]+?|#?r+o+n+f+|#uff|ronf)",
            EMOTEEHEH 	="(#?e?h?eh[^h][eh]+)",
            EMOTEAZZ 	="(#?azz+)",
            EMOTEDAIII 	="(#?[dv]aii+|#[dv]ai|forzaa+)",
-           cazzo 	="(#?cazz[oi]+)",
+           cazzo 	="(#?cazz[oi]+|ca\\*\\*o|c\\*\\*\\*+o)",
            cazzata 	="(#?cazzat[a]+)",
            merda 	="(#?merd[a]+)",
-           cazzo	="ca\\*\\*o|c\\*\\*\\*+o",
            EMOTEAAA 	="(#?aaa+)",
            EMOTEOOO 	="(#?ooo+)",
            EMOTEEEE 	="(#?eee+)",
@@ -67,25 +66,31 @@ char_wow=c(EMOTEZZZ 	="(#?zz+|#?u+ff[aif]+?|#?r+o+n+f+|#uff|ronf)",
            EMOTEWOW 	="#?([uw]+[ao]+[uw]+)")
 
 
-summary.txts <- function(txts,nMostFrequentWords=Inf){
+summary.txts <- function(txts){
   #   txts=posts
   nchar.mess=sapply(txts,nchar)
   # hist(nchar.mess,xlim=c(1,100),10000)
-  statistics=c(messaggi.totali=length(txts),  caratteri.totali=sum(nchar.mess), 
-               caratteri.per.messaggio=summary(nchar.mess))
+  statistics=c(number=length(txts),  
+               total_nchar=sum(nchar.mess), 
+               nchar_per_text=summary(nchar.mess))
   #   print(summary)
   #   quantiles.nchar=quantile(nchar.mess,c(.1,.25,.5,.75))
+  statistics
+}
+
+########
+summary.txts_words <- function(txts,nMostFrequentWords=Inf){
   
   posts.norm=normalizzaTesti(txts,contaStringhe = c("\\?","\\!"),normalizzaslang = TRUE,normalizzahtml = TRUE)
   freqDomEsc=colSums(attributes(posts.norm)$counts)
-
+  
   stringhe=c(char_emoticons,char_wow,char_non_word)  
   #library(tm)
-  corpus <- tm::Corpus(VectorSource(paste(posts.norm,collapse = " ")))
+  corpus <- tm::Corpus(tm::VectorSource(paste(posts.norm,collapse = " ")))
   #[Nell'ambito dei motori di ricerca, l'espressione - scritta anche stopwords - indica quelle parole che, per la loro alta frequenza in una lingua, sono di solito ritenute poco significative dai motori, che le ignorano]
-  freq_emoticons <- as.matrix(DocumentTermMatrix(corpus
-                                                 , control = list( stemming = FALSE, 
-                                                                   dictionary=stringhe) )
+  freq_emoticons <- as.matrix(tm::DocumentTermMatrix(corpus
+                                                     , control = list( stemming = FALSE, 
+                                                                       dictionary=stringhe) )
   )
   colnames(freq_emoticons)=names(freq_emoticons)
   freq_emoticons=data.frame(freq_emoticons)
@@ -103,7 +108,6 @@ summary.txts <- function(txts,nMostFrequentWords=Inf){
   most.word=sort(tabParole,decreasing = TRUE)
   
   list(freq_parole=most.word[1:min(length(most.word),nMostFrequentWords)],
-       statistics=statistics,
        freq_emoticons=freq_emoticons,
        freq_links =freq_links)
 }
@@ -119,14 +123,14 @@ getMessages_summary_string_counts <- function(mess,stringhe=NULL){
   
   fun_temp <- function(dati){
     conteggi = plyr::llply(stringhe, function(stringa) stringr::str_count(dati$text, 
-                                                                   stringa))
+                                                                          stringa))
     colSums(as.data.frame(conteggi))
   }
   list(user_grp=fun_temp(mess[(mess$user==nome_utente)&(mess$gruppo==TRUE),]),
        user_personal=fun_temp(mess[(mess$user==nome_utente)&(mess$gruppo==FALSE
-                                                             ),]),
+       ),]),
        others_grp=fun_temp(mess[(!(mess$user==nome_utente))&(mess$gruppo==TRUE),]),
-  others_personal=fun_temp(mess[(!(mess$user==nome_utente))&(mess$gruppo==FALSE),]))
+       others_personal=fun_temp(mess[(!(mess$user==nome_utente))&(mess$gruppo==FALSE),]))
 }
 
 
@@ -145,9 +149,9 @@ mode <- function(x) as.numeric(names(which.max(table(x))))
 activity_time_summary <- function(action_times,dataI=NULL,dataF=NULL){
   if(length(action_times)==0) return(
     c(days_off=days_off_summary(c()),
-    week_off=days_off_summary(c()),
-    acts_day=some_statistics(c()),
-    acts_day_0excl=some_statistics(c()),
+      week_off=days_off_summary(c()),
+      acts_day=some_statistics(c()),
+      acts_day_0excl=some_statistics(c()),
     acts_week=some_statistics(c()),
     acts_week_0excl=some_statistics(c()))
   )
@@ -161,17 +165,17 @@ activity_time_summary <- function(action_times,dataI=NULL,dataF=NULL){
   giorni=as.character(seq(dataI,dataF,by=1))
   giorni_mess=factor(as.Date(action_times),levels = giorni)
   table_acts_per_day=table(giorni_mess)
-  days_off=days_off_summary(table_acts_per_day)
-  acts_day=some_statistics(table_acts_per_day)
-  acts_day_0excl=some_statistics(table_acts_per_day[table_acts_per_day>0])
+  days_off=myFBr:::days_off_summary(table_acts_per_day)
+  acts_day=myFBr:::some_statistics(table_acts_per_day)
+  acts_day_0excl=myFBr:::some_statistics(table_acts_per_day[table_acts_per_day>0])
   
   
   weeks=as.character(strftime(seq(dataI,dataF,by=7),format="%W-%Y")) 
   week_mess=factor(strftime(action_times,format="%W-%Y") ,levels = weeks)
   table_acts_per_week=table(week_mess)
-  week_off=days_off_summary(table_acts_per_week)
-  acts_week=some_statistics(table_acts_per_week)
-  acts_week_0excl=some_statistics(table_acts_per_week[table_acts_per_week>0])
+  week_off=myFBr:::days_off_summary(table_acts_per_week)
+  acts_week=myFBr:::some_statistics(table_acts_per_week)
+  acts_week_0excl=myFBr:::some_statistics(table_acts_per_week[table_acts_per_week>0])
   
   
   c(days_off=days_off,week_off=week_off,acts_day=acts_day,
@@ -189,4 +193,22 @@ days_off_summary <- function(table_acts_per_day){
   
   c(prop_inactive=mean(table_acts_per_day==0) ,some_statistics(giorni_inattivita))
   
+}
+
+summary_freq_events_week_hour<-function(mess){
+  
+  temp=factor(format(mess$time, "%H"),
+              levels=c("00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23"))
+  freq_ore=prop.table(table(temp))
+  names(dimnames(freq_ore))[1]=""
+  
+  giorni=weekdays(mess$time)
+  giorni=gsub(".$","",giorni)
+  temp=factor(giorni,levels=c("luned","marted","mercoled","gioved","venerd","sabat","domenic"))
+  freq_giorni=prop.table(table(temp))
+  names(dimnames(freq_giorni))[1]=""
+  # barplot(freq_giorni[1:7])
+  
+  n_days_active=length(unique(format(mess$time, "%Y-%m-%d")))
+ list(freq_ore=freq_ore,freq_giorni=freq_giorni,n_days_active=n_days_active)
 }

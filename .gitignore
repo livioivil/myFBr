@@ -2,12 +2,9 @@
 .Rhistory
 
 flip.Rproj
-
 # Example code in package build process
 *-Ex.R
-
 # bk files
 *~
 .Rproj.user
-
-
+inst/doc

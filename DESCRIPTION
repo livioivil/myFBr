@@ -7,3 +7,6 @@ Maintainer: Livio Finos <livio.finos@unipd.it>
 Description: Reads and visualizes the infos of your FaceBook profile
 License: GPL (>= 2)
 RoxygenNote: 6.0.1
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr
