@@ -1,3 +1,9 @@
+---
+title: "myFBr"
+author: "Livio Finos and the others"
+date: "11 febbraio 2019"
+output: rmarkdown::github_document
+---
 
 # Welcome to the myFBr 
 myFBr is a R library specifically developed to extract information from Facebook profiles. This library contains codes able to read information from the html pages, to transform such information into quantitative data, and to save data in a dataset. 
